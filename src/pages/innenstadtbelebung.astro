@@ -1,0 +1,503 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Wordmark from '../components/Wordmark.astro';
+import Placeholder from '../components/Placeholder.astro';
+import ArrowMotif from '../components/ArrowMotif.astro';
+
+const logos = ['Heidelberg', 'Deidesheim', 'Ellwangen', 'Neustadt a. d. Weinstraße', 'Freiburg', 'Schwetzingen', 'Nagold', 'Sinsheim', 'Wittenberg', 'Mannheim'];
+
+const ausgangslage = [
+  { n: '01', t: 'Veränderte Gewohnheiten', d: 'Menschen verbringen ihre Freizeit anders, die Aufenthaltsdauer sinkt, die Erwartungen an Erlebnis und öffentlichen Raum steigen.' },
+  { n: '02', t: 'Aufenthaltsqualität', d: 'Zu wenig Grün, Schatten und Sitzgelegenheiten, wenig Orte zum Verweilen und Begegnen.' },
+  { n: '03', t: 'Orientierung & Mobilität', d: 'Besucher finden Sehenswürdigkeiten, Parkmöglichkeiten und Angebote nicht auf Anhieb; Wege sind schlecht verknüpft.' },
+  { n: '04', t: 'Profil & Handel', d: 'Ein uneinheitliches Stadtbild, ein unscharfes Profil und der Strukturwandel im Handel schwächen die Anziehungskraft.' },
+];
+
+const handlungsfelder = [
+  { t: 'Erlebnisort Innenstadt', d: 'Handel, Gastronomie, Kultur und Freizeit zu einem Stadterlebnis verbinden, das Menschen gerne besuchen.' },
+  { t: 'Aufenthaltsqualität & Stadtmöblierung', d: 'Einheitliche Möblierung, Begrünung, Wasser und Schatten, Kunst im öffentlichen Raum und temporäre Aktionen, die Plätze beleben.' },
+  { t: 'Besucherlenkung & Orientierung', d: 'Fußgänger- und touristische Leitsysteme, barrierefreie Information und die Verbindung von analoger und digitaler Orientierung – z. B. vom Bahnhof, Parkhaus oder ÖPNV in die Innenstadt.' },
+  { t: 'Stadtmarketing & Profil', d: 'Ein klares Profil und eine starke Stadtmarke, die Bürgerinnen, Bürger und Gäste emotional an die Innenstadt binden – entwickelt gemeinsam mit den Beteiligten vor Ort.' },
+  { t: 'Räume neu denken', d: 'Leerstände systematisch erfassen und visualisieren (GIS-basiert), neue Nutzungen für Kultur, Freizeit und Begegnung entwickeln.' },
+];
+
+const massnahmen = [
+  { t: 'Besucherlenkung & Fußgängerleitung', d: 'Wege, die zu Entdeckungen werden.', alt: 'Fußgänger-Wegweiser an einem Altstadtplatz' },
+  { t: 'Möblierungs- & Begrünungskonzepte', d: 'Orte zum Verweilen schaffen.', alt: 'Begrünte Sitzmöbel auf einem Stadtplatz' },
+  { t: 'Platzgestaltung & Installationen', d: 'Plätze temporär oder dauerhaft aktivieren.', alt: 'Temporäre Installation auf einem Marktplatz' },
+  { t: 'Werbeanlagen- & Gestaltungssatzungen', d: 'Ein ruhiges, einheitliches Stadtbild.', alt: 'Einheitlich gestaltete Ladenfassaden in einer Fußgängerzone' },
+  { t: 'Aufwertung & Attraktivierung', d: 'Sichtbare Qualität, z. B. Haltestellen, Fassaden, Eingänge.', alt: 'Aufgewertete Haltestelle „Innenstadt“' },
+  { t: 'Digitale Medien & Info-Apps', d: 'Orientierung und Information auf dem Smartphone.', alt: 'Person nutzt eine Info-App in der Altstadt' },
+];
+
+const projektarten = ['Positionierung Stadtmarke & Image', 'Kommunikations- und Stadtmarketingkonzepte', 'Kampagnen (Image, Tourismus, Buy Local)', 'Social Media & Online-Sichtbarkeit', 'Quartiersentwicklung'];
+const formate = ['Workshops und Roundtables', 'Bürgerbefragungen und Beteiligungskonzepte', 'Expertengespräche und Stakeholder-Einbindung', 'Informationsveranstaltungen', 'Prozessbegleitung für die Verwaltung', 'Initiierung von PPP-Projekten'];
+
+const ablauf = [
+  { t: 'Bestandsaufnahme', d: 'Vor-Ort-Begehung, Analyse von Wegen, Plätzen, Angeboten und Leerständen.' },
+  { t: 'Beteiligung', d: 'Gespräche mit Verwaltung, Handel, Gastronomie, Bürgerinnen und Bürgern.' },
+  { t: 'Konzept & Maßnahmenplan', d: 'Priorisierte Maßnahmen mit Kostenrahmen und Hinweisen zu Fördermöglichkeiten.' },
+  { t: 'Umsetzung & Vergabe', d: 'Ausführungsplanung, Begleitung des Vergabeverfahrens und der Realisierung.' },
+];
+
+const projekte = [
+  { t: 'Vom Bahnhof in die Innenstadt', tag: 'Besucherlenkung', ort: 'Ellwangen', alt: 'Wegweisung vom Bahnhof in die Innenstadt Ellwangen' },
+  { t: 'Begrünte Stadtmöblierung für mehr Aufenthaltsqualität', tag: 'Aufenthaltsqualität', ort: null, alt: 'Begrünte Stadtmöblierung („Aufs richtige Pferd gesetzt“)' },
+  { t: 'Altstadtflair bewahren', tag: 'Werbeanlagensatzung', ort: 'Heidelberg', alt: 'Altstadtgasse in Heidelberg mit einheitlichen Werbeanlagen' },
+  { t: 'Dem Geißbock auf der Spur', tag: 'Barrierefreies touristisches Leitsystem', ort: 'Deidesheim', alt: 'Barrierefreies Leitsystem in Deidesheim' },
+];
+
+const argumente = [
+  { t: 'Herstellerneutral', d: 'Wir planen und beraten unabhängig. Wir verkaufen keine Schilder und keine Möbel, sondern die passende Lösung.' },
+  { t: 'Wir sprechen „kommunal“', d: 'Wir kennen Abläufe, Gremien, Fördermittel und Vergaberecht und begleiten die Verwaltung durch den gesamten Prozess.' },
+  { t: 'Ganzheitlich', d: 'Von Orientierung über Aufenthaltsqualität bis Stadtmarketing: alles aus einer Hand, aufeinander abgestimmt.' },
+];
+
+const faq = [
+  { q: 'Lohnt sich das auch für kleinere Gemeinden?', a: 'Ja. Viele Maßnahmen sind skalierbar – von einzelnen Plätzen und Wegen bis zum gesamten Innenstadtkonzept.' },
+  { q: 'Gibt es Fördermittel?', a: 'Häufig ja. Neben der Städtebauförderung gibt es Landesprogramme, z. B. „Innenstadt-Impulse“ (Rheinland-Pfalz) oder „Zukunft Innenstadt“ (Hessen). Wir zeigen auf, welche Maßnahmen förderfähig sein können.', todo: 'Programme vor Veröffentlichung prüfen, BW ergänzen' },
+  { q: 'Begleitet ihr auch die Ausschreibung?', a: 'Ja. Wir erstellen Ausführungsplanung und Leistungsverzeichnisse und begleiten das Vergabeverfahren.' },
+  { q: 'Wie werden Bürger und Handel eingebunden?', a: 'Über Workshops, Befragungen, Roundtables und Expertengespräche – je nach Projekt und Budget.' },
+  { q: 'Wie lange dauert ein Projekt?', todo: 'Spannen nennen, z. B. Konzept 3–6 Monate' },
+  { q: 'Was kostet ein Innenstadtkonzept?', todo: 'Entscheidung: „ab“-Preis oder nur auf Anfrage' },
+  { q: 'Seid ihr Hersteller von Leitsystemen oder Möbeln?', a: 'Nein. Wir planen herstellerneutral und begleiten die Vergabe an ausführende Firmen.' },
+];
+
+const anliegen = ['Innenstadtkonzept', 'Aufenthaltsqualität & Möblierung', 'Besucherlenkung', 'Stadtmarketing & Beteiligung', 'Noch offen'];
+---
+<Base
+  title="Innenstadtbelebung & Innenstadtentwicklung | city concepts"
+  description="Konkrete Maßnahmen für eine lebendige Innenstadt: Analyse, Beteiligung, Konzept und Umsetzung – herstellerneutral und förderkundig. Jetzt Erstgespräch anfragen."
+>
+  <header class="site-header">
+    <div class="container site-header__in">
+      <a href="/innenstadtbelebung/" class="site-header__logo" aria-label="city concepts – Startseite dieser Seite"><Wordmark /></a>
+      <a class="btn btn--ink site-header__cta" href="#kontakt" data-track="cta-header">Erstgespräch anfragen</a>
+    </div>
+  </header>
+
+  <main id="inhalt">
+    <!-- S1 Hero -->
+    <section class="hero section--pastel" aria-labelledby="h1">
+      <ArrowMotif class="hero__arrows" />
+      <div class="container hero__in">
+        <div class="hero__text">
+          <p class="eyebrow">Innenstadtentwicklung für Städte und Gemeinden</p>
+          <h1 id="h1" class="display">Erlebnisraum Innenstadt.</h1>
+          <p class="lead hero__sub">Konkrete Handlungsempfehlungen und Maßnahmen für die Aufwertung und Belebung Ihrer Innenstadt – von der Analyse bis zur Umsetzung.</p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#kontakt" data-track="cta-hero-primary">Erstgespräch anfragen</a>
+            <a class="btn btn--ink" href="#handlungsfelder" data-track="cta-hero-secondary">Handlungsfelder ansehen <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <Placeholder class="hero__img" ratio="16 / 9" alt="Panorama einer belebten Altstadt, z. B. Heidelberg, mit Menschen auf dem Platz" src="assets/innenstadtbelebung/hero-panorama" />
+      </div>
+    </section>
+
+    <!-- S2 Logo-Leiste -->
+    <section class="logos" aria-labelledby="logos-h">
+      <div class="container">
+        <h2 id="logos-h" class="small logos__label">Kommunen, für die wir bereits tätig sein durften <span class="todo">Freigabe Logos klären</span></h2>
+        <ul class="logos__list">
+          {logos.map((l) => <li>{l}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- S3 Ausgangslage -->
+    <Section tone="white" eyebrow="Ausgangslage" heading="Innenstädte im Wandel." headingId="ausgangslage-h"
+      lead="Die Herausforderungen entstehen selten durch ein einzelnes Problem, sondern durch das Zusammenspiel von gesellschaftlichem Wandel, Handel, Mobilität, Tourismus und Stadtentwicklung.">
+      <ol class="grid grid--4 numbered">
+        {ausgangslage.map((a) => (
+          <li class="numbered__item">
+            <span class="num">{a.n}</span>
+            <h3 class="h3">{a.t}</h3>
+            <p>{a.d}</p>
+          </li>
+        ))}
+      </ol>
+    </Section>
+
+    <!-- S4 Statement -->
+    <section class="section section--petrol on-dark statement-sec" aria-labelledby="statement-h">
+      <div class="container statement-sec__in">
+        <h2 id="statement-h" class="statement">Die Zukunft der Innenstadt entscheidet sich <span class="accent">nicht mehr allein</span> über den Handel.</h2>
+        <p class="lead">Lebendige Innenstädte verbinden Handel, Gastronomie, Kultur, Tourismus, Aufenthaltsqualität und Orientierung zu einem Gesamterlebnis. Genau dort setzen wir an.</p>
+      </div>
+    </section>
+
+    <!-- S5 Handlungsfelder -->
+    <Section id="handlungsfelder" tone="soft" eyebrow="Handlungsfelder" heading="Fünf Hebel für eine lebendige Innenstadt." headingId="hf-h">
+      <ol class="hf">
+        {handlungsfelder.map((h, i) => (
+          <li class="card hf__item">
+            <div class="card__body">
+              <span class="num">0{i + 1}</span>
+              <h3 class="h3">{h.t}</h3>
+              <p>{h.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Section>
+
+    <!-- S6 Maßnahmen -->
+    <Section tone="white" eyebrow="Maßnahmen" heading="Vom Konzept zur sichtbaren Veränderung." headingId="massn-h"
+      lead="city concepts übersetzt die Handlungsfelder in konkrete Maßnahmen – passend zu Größe, Budget und Ausgangslage Ihrer Kommune.">
+      <ul class="grid grid--3">
+        {massnahmen.map((m) => (
+          <li>
+            <article class="card">
+              <Placeholder alt={m.alt} ratio="3 / 2" src="assets/innenstadtbelebung/" />
+              <div class="card__body">
+                <h3 class="h4">{m.t}</h3>
+                <p>{m.d}</p>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <!-- S7 Kommunikation & Beteiligung -->
+    <Section tone="pastel" eyebrow="Kommunikation & Beteiligung" heading="Innenstadt entsteht gemeinsam." headingId="beteiligung-h">
+      <div class="grid grid--2 two-col">
+        <div>
+          <h3 class="h3">Projektarten</h3>
+          <ul class="list-square">{projektarten.map((p) => <li>{p}</li>)}</ul>
+        </div>
+        <div>
+          <h3 class="h3">Formate</h3>
+          <ul class="list-square">{formate.map((p) => <li>{p}</li>)}</ul>
+        </div>
+      </div>
+      <Placeholder class="mt" ratio="21 / 9" alt="Workshop mit Bürgerinnen und Bürgern, Stellwände mit Ideen" src="assets/innenstadtbelebung/" />
+    </Section>
+
+    <!-- S8 Ablauf -->
+    <Section tone="white" eyebrow="Ablauf" heading="So arbeiten wir mit Ihnen." headingId="ablauf-h">
+      <p class="todo todo--block">Ablauf mit city concepts bestätigen</p>
+      <ol class="grid grid--4 numbered">
+        {ablauf.map((a, i) => (
+          <li class="numbered__item">
+            <span class="num">0{i + 1}</span>
+            <h3 class="h3">{a.t}</h3>
+            <p>{a.d}</p>
+          </li>
+        ))}
+      </ol>
+    </Section>
+
+    <!-- S9 Projekte -->
+    <Section tone="soft" eyebrow="Projekte" heading="Eine Auswahl unserer Projekte." headingId="projekte-h">
+      <ul class="grid grid--2 projects">
+        {projekte.map((p) => (
+          <li>
+            <article class="card">
+              <Placeholder alt={p.alt} ratio="16 / 9" src="assets/innenstadtbelebung/" />
+              <div class="card__body">
+                <p class="card__tag">{p.tag}</p>
+                <h3 class="h3">{p.t}</h3>
+                <p class="loc">
+                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+                  <span class="visually-hidden">Ort: </span>{p.ort ?? <span class="todo">Ort</span>}
+                </p>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
+      <h3 class="h3 quotes-h">Kundenstimmen <span class="todo">Freigabe für Web klären</span></h3>
+      <div class="grid grid--2">
+        <figure class="quote">
+          <blockquote><p>„Die Zusammenarbeit mit city concepts war sehr gut und hat hervorragende Ergebnisse gebracht.“</p></blockquote>
+          <figcaption>Verena Kiedaisch, City-Managerin und Wirtschaftsbeauftragte, Stadt Ellwangen</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote><p>„[…] Ihr Umgang mit den Herausforderungen einer barrierefreien Gestaltung in einem denkmalgeschützten Bereich war beispielhaft. […]“</p></blockquote>
+          <figcaption>Manfred Dörr, Stadtbürgermeister, Deidesheim</figcaption>
+        </figure>
+      </div>
+    </Section>
+
+    <!-- S10 Warum city concepts -->
+    <Section tone="white" eyebrow="Warum city concepts" heading="Warum Kommunen mit uns arbeiten." headingId="warum-h">
+      <ol class="grid grid--3 numbered">
+        {argumente.map((a, i) => (
+          <li class="numbered__item">
+            <span class="num">0{i + 1}</span>
+            <h3 class="h3">{a.t}</h3>
+            <p>{a.d}</p>
+          </li>
+        ))}
+      </ol>
+    </Section>
+
+    <!-- S11 Kennzahlen -->
+    <section class="section section--petrol on-dark" aria-labelledby="kz-h">
+      <div class="container">
+        <h2 id="kz-h" class="visually-hidden">city concepts in Zahlen</h2>
+        <p class="todo todo--block">Kennzahlen bestätigen</p>
+        <dl class="stats">
+          <div><dt>Jahre Arbeit für Städte und Kommunen</dt><dd class="stats__n">20+</dd></div>
+          <div><dt>Kommunen betreut</dt><dd class="stats__n"><span class="todo">XX</span></dd></div>
+          <div><dt>begleitete Vergabeverfahren</dt><dd class="stats__n">120</dd></div>
+        </dl>
+        <Placeholder class="mt" ratio="21 / 7" alt="Stadtpanorama als Hintergrund der Kennzahlen" src="assets/innenstadtbelebung/" />
+      </div>
+    </section>
+
+    <!-- S12 FAQ -->
+    <section class="section" aria-labelledby="faq-h">
+      <div class="container faq">
+        <div>
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-h" class="title">Häufige Fragen.</h2>
+        </div>
+        <div class="faq__list">
+          {faq.map((f) => (
+            <details>
+              <summary><span class="row-q">{f.q}</span></summary>
+              <div class="faq__a">
+                {f.a && <p>{f.a}</p>}
+                {f.todo && <p class="todo todo--block">{f.todo}</p>}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- S13 Lead-Magnet (optional) -->
+    <section class="section section--pastel" aria-labelledby="lead-h">
+      <div class="container leadmag">
+        <div>
+          <p class="eyebrow">Kostenloser Leitfaden</p>
+          <h2 id="lead-h" class="title">10 Impulse für eine lebendige Innenstadt.</h2>
+          <p class="lead">Kompakte Ideen und Praxisbeispiele für Verwaltung, Stadtmarketing und Gemeinderat – als PDF per E-Mail.</p>
+          <p class="todo todo--block">Optional – neuer Leitfaden oder bestehender Vergabe-Leitfaden?</p>
+        </div>
+        <div>
+          <a class="btn btn--primary" href="#kontakt" data-track="lead-magnet">Leitfaden anfordern</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- S14 Kontakt -->
+    <section id="kontakt" class="section section--petrol on-dark" aria-labelledby="kontakt-h">
+      <div class="container contact">
+        <div class="contact__intro">
+          <p class="eyebrow">Kontakt</p>
+          <h2 id="kontakt-h" class="title">Lassen Sie uns über Ihre Innenstadt sprechen.</h2>
+          <p class="lead">Erzählen Sie uns von Ihrer Ausgangslage – wir melden uns innerhalb von <span class="todo">2 Werktagen</span> mit einem Vorschlag für ein Erstgespräch.</p>
+          <div class="person">
+            <Placeholder ratio="1 / 1" alt="Foto Ansprechpartner:in" class="person__img" />
+            <p><span class="todo">Name, Funktion</span><br /><a href="tel:+49000000000" data-track="tel"><span class="todo">Telefon</span></a><br /><a href="mailto:kontakt@example.invalid" data-track="mail"><span class="todo">E-Mail</span></a></p>
+          </div>
+        </div>
+
+        <form id="kontakt-form" class="form" action="/danke/" method="post" novalidate>
+          <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="gclid" />
+          <p class="form__step" id="step-label" aria-live="polite">Schritt 1 von 2</p>
+
+          <fieldset class="form__step-1" id="step-1">
+            <legend class="h4">Ihr Anliegen <span class="small">(Mehrfachauswahl möglich)</span></legend>
+            <div class="chips">
+              {anliegen.map((a, i) => (
+                <label class="chip">
+                  <input type="checkbox" name="anliegen" value={a} />
+                  <span>{a}</span>
+                </label>
+              ))}
+            </div>
+            <button type="button" class="btn btn--primary" id="next">Weiter</button>
+          </fieldset>
+
+          <fieldset class="form__step-2" id="step-2" hidden>
+            <legend class="h4">Ihre Angaben</legend>
+            <div class="field"><label for="f-kommune">Kommune <span aria-hidden="true">*</span></label><input id="f-kommune" name="kommune" required autocomplete="organization" /></div>
+            <div class="field"><label for="f-name">Name <span aria-hidden="true">*</span></label><input id="f-name" name="name" required autocomplete="name" /></div>
+            <div class="field"><label for="f-funktion">Funktion</label><input id="f-funktion" name="funktion" autocomplete="organization-title" /></div>
+            <div class="field"><label for="f-mail">E-Mail <span aria-hidden="true">*</span></label><input id="f-mail" name="email" type="email" required autocomplete="email" /></div>
+            <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" name="telefon" type="tel" autocomplete="tel" /></div>
+            <div class="field"><label for="f-msg">Nachricht</label><textarea id="f-msg" name="nachricht" rows="4"></textarea></div>
+            <div class="field field--check">
+              <input id="f-dsgvo" name="datenschutz" type="checkbox" required />
+              <label for="f-dsgvo">Ich habe die <a href="/datenschutz/">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. <span aria-hidden="true">*</span></label>
+            </div>
+            <p class="small">* Pflichtfelder</p>
+            <div class="form__actions">
+              <button type="button" class="btn btn--white" id="back">Zurück</button>
+              <button type="submit" class="btn btn--primary" data-track="form-submit">Anfrage senden</button>
+            </div>
+          </fieldset>
+          <div class="form__errors" id="form-errors" role="alert" tabindex="-1" hidden></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__in">
+      <div>
+        <Wordmark />
+        <p class="small">Eine Marke der unity concepts GmbH · Heidelberg <span class="todo">Adresse prüfen</span></p>
+      </div>
+      <nav aria-label="Rechtliches">
+        <ul>
+          <li><a href="/impressum/">Impressum</a></li>
+          <li><a href="/datenschutz/">Datenschutz</a></li>
+          <li><a href="/barrierefreiheit/">Barrierefreiheitserklärung</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Tracking-Parameter in versteckte Felder übernehmen (docs/tracking.md)
+    const params = new URLSearchParams(location.search);
+    const form = document.getElementById('kontakt-form') as HTMLFormElement;
+    ['utm_source', 'utm_medium', 'utm_campaign', 'gclid'].forEach((k) => {
+      const el = form.elements.namedItem(k) as HTMLInputElement | null;
+      if (el && params.get(k)) el.value = params.get(k)!;
+    });
+
+    const step1 = document.getElementById('step-1')!;
+    const step2 = document.getElementById('step-2')!;
+    const label = document.getElementById('step-label')!;
+    const errors = document.getElementById('form-errors')!;
+
+    function show(step: 1 | 2) {
+      step1.hidden = step !== 1;
+      step2.hidden = step !== 2;
+      label.textContent = `Schritt ${step} von 2`;
+      (step === 1 ? step1 : step2).querySelector<HTMLElement>('input, button')?.focus();
+    }
+    document.getElementById('next')!.addEventListener('click', () => show(2));
+    document.getElementById('back')!.addEventListener('click', () => show(1));
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fields = [...form.querySelectorAll<HTMLInputElement>('[required]')];
+      const bad = fields.filter((f) => (f.type === 'checkbox' ? !f.checked : !f.checkValidity() || !f.value.trim()));
+      fields.forEach((f) => { f.removeAttribute('aria-invalid'); });
+      if (bad.length) {
+        bad.forEach((f) => f.setAttribute('aria-invalid', 'true'));
+        const names = bad.map((f) => (f.type === 'checkbox' ? 'Datenschutz-Zustimmung' : form.querySelector(`label[for="${f.id}"]`)!.textContent!.replace('*', '').trim()));
+        errors.hidden = false;
+        errors.textContent = `Bitte prüfen Sie: ${names.join(', ')}.`;
+        errors.focus();
+        bad[0].focus();
+        return;
+      }
+      errors.hidden = true;
+      // TODO: Versandweg offen (docs/entscheidungen.md). Bis dahin wird nichts gesendet.
+      window.location.href = '/danke/';
+    });
+  </script>
+</Base>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--c-line); background: var(--c-white); }
+  .site-header__in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 5rem; }
+  .site-header__logo { color: var(--c-ink); text-decoration: none; }
+  .site-header__cta { min-height: 2.75rem; padding: 0 1.25rem; }
+
+  .hero { position: relative; overflow: hidden; padding-block: clamp(3rem, 2rem + 5vw, 7.5rem); }
+  :global(.hero__arrows) { position: absolute; right: -8%; top: 50%; width: min(60vw, 52rem); transform: translateY(-50%); opacity: 0.4; pointer-events: none; }
+  .hero__in { position: relative; display: grid; gap: 3rem; }
+  .hero__text { max-width: 60rem; }
+  .hero__sub { margin-top: 1.5rem; max-width: 40rem; }
+  .hero__cta { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+  @media (min-width: 62rem) { :global(.hero__img) { max-width: 52rem; } }
+
+  .logos { padding-block: 2.5rem; border-bottom: 1px solid var(--c-line); }
+  .logos__label { color: var(--c-text-muted); margin-bottom: 1.25rem; font-weight: 500; }
+  .logos__list { display: flex; flex-wrap: wrap; gap: 0.75rem 2.5rem; font-size: var(--fs-h4); font-weight: 500; color: var(--c-text); }
+
+  .numbered__item { border-top: 3px solid var(--c-green); padding-top: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .section--petrol .numbered__item { border-top-color: var(--c-green); }
+
+  .statement-sec__in { display: grid; gap: 2rem; max-width: 62rem; }
+  .accent { color: var(--c-green); }
+
+  .hf { display: grid; gap: var(--gap); grid-template-columns: 1fr; }
+  @media (min-width: 40rem) { .hf { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 62rem) {
+    .hf { grid-template-columns: repeat(6, 1fr); }
+    .hf__item { grid-column: span 2; }
+    .hf__item:nth-child(n+4) { grid-column: span 3; }
+  }
+  .hf__item { border-left: 6px solid var(--c-green); }
+
+  .two-col h3 { margin-bottom: 1.25rem; }
+  :global(.mt) { margin-top: clamp(2rem, 4vw, 4rem); }
+
+  .loc { display: flex; align-items: center; gap: 0.4rem; color: var(--c-text-muted); font-size: var(--fs-small); margin-top: auto; }
+  .quotes-h { margin: clamp(2.5rem, 5vw, 5rem) 0 1.5rem; }
+  .quote { margin: 0; padding: 1.5rem 1.5rem 1.5rem 2rem; border-left: 6px solid var(--c-green); background: var(--c-white); border-radius: var(--radius); }
+  .quote blockquote { margin: 0; font-size: var(--fs-h4); line-height: 1.6; font-weight: 300; }
+  .quote figcaption { margin-top: 1rem; font-size: var(--fs-small); color: var(--c-text-muted); }
+
+  .stats { display: grid; gap: 2.5rem; margin: 0; }
+  @media (min-width: 48rem) { .stats { grid-template-columns: repeat(3, 1fr); } }
+  .stats > div { display: flex; flex-direction: column-reverse; gap: 0.5rem; border-top: 3px solid var(--c-green); padding-top: 1rem; }
+  .stats dd { margin: 0; }
+  .stats__n { font-size: var(--fs-display); line-height: 1; font-weight: 500; letter-spacing: -0.03em; color: var(--c-green); }
+
+  .faq { display: grid; gap: 2rem; }
+  @media (min-width: 62rem) { .faq { grid-template-columns: 1fr 2fr; gap: 4rem; } }
+  .faq details { border-top: 1px solid var(--c-text-muted); }
+  .faq details:last-child { border-bottom: 1px solid var(--c-text-muted); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 1.5rem; align-items: center; padding: 1.25rem 0; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; font-size: 2rem; line-height: 1; font-weight: 300; flex: none; }
+  .faq details[open] summary::after { content: '–'; }
+  .row-q { font-size: var(--fs-h4); font-weight: 500; line-height: 1.4; }
+  .faq__a { padding: 0 0 1.5rem; max-width: 44rem; }
+
+  .leadmag { display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 62rem) { .leadmag { grid-template-columns: 2fr 1fr; justify-items: start; } }
+  .leadmag .lead { margin-top: 1rem; }
+
+  .contact { display: grid; gap: 3rem; }
+  @media (min-width: 62rem) { .contact { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; } }
+  .contact__intro .lead { margin-top: 1.5rem; }
+  .person { display: flex; align-items: center; gap: 1.25rem; margin-top: 2.5rem; }
+  .person :global(.person__img) { width: 6rem; flex: none; }
+  .person a { color: var(--c-white); }
+
+  .form { background: var(--c-petrol-deep); padding: clamp(1.25rem, 3vw, 2.5rem); border-radius: var(--radius); }
+  .form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
+  .form fieldset[hidden] { display: none; }
+  .form legend { padding: 0; margin-bottom: 1.25rem; }
+  .form__step { font-size: var(--fs-small); margin-bottom: 1rem; color: var(--c-white); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .chip { position: relative; cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .chip span { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0 1.1rem; border: 2px solid var(--c-white); border-radius: 999px; }
+  .chip input:checked + span { background: var(--c-white); color: var(--c-petrol); font-weight: 500; }
+  .chip input:checked + span::before { content: '✓'; }
+  .chip input:focus-visible + span { outline: 2px solid var(--c-white); outline-offset: 3px; }
+  .field { width: 100%; display: flex; flex-direction: column; gap: 0.4rem; }
+  .field label { font-weight: 500; }
+  .field input:not([type='checkbox']), .field textarea { width: 100%; min-height: 2.75rem; padding: 0.6rem 0.8rem; background: var(--c-white); color: var(--c-ink); border: 2px solid var(--c-text-muted); border-radius: var(--radius); }
+  .field [aria-invalid='true'] { border-color: var(--c-ink); border-width: 3px; box-shadow: 0 0 0 3px var(--c-white); }
+  .field--check { flex-direction: row; align-items: flex-start; gap: 0.75rem; }
+  .field--check input { width: 1.5rem; height: 1.5rem; flex: none; margin-top: 0.15rem; accent-color: var(--c-green); }
+  .field--check label { font-weight: 400; }
+  .form a { color: var(--c-white); }
+  .form__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .form__errors { margin-top: 1.25rem; padding: 1rem; background: var(--c-white); color: var(--c-ink); border-left: 6px solid var(--c-ink); font-weight: 500; }
+  .form__errors[hidden] { display: none; }
+
+  .site-footer { background: var(--c-ink); color: var(--c-white); padding-block: 3rem; }
+  .site-footer__in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
+  .site-footer a { color: var(--c-white); }
+  .site-footer ul { display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; }
+  .site-footer .small { margin-top: 0.75rem; }
+
+  .todo--block { display: inline-block; margin-bottom: 1.5rem; font-size: var(--fs-small); }
+  .faq .todo--block { margin-bottom: 0; }
+</style>

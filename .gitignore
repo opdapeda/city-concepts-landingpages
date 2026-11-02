@@ -37,3 +37,8 @@ pnpm-debug.log*
 
 # Claude Code (lokal)
 .claude/settings.local.json
+
+# Große Quelldateien (GitHub-Limit 100 MB) – liegen nur lokal
+docs/quellen/**/*.pptx
+docs/quellen/**/*.key
+docs/quellen/**/*.pdf

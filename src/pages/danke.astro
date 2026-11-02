@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+---
+<Base title="Vielen Dank für Ihre Anfrage | city concepts" description="Ihre Anfrage ist eingegangen." noindex>
+  <header class="site-header"><div class="container"><a href="/innenstadtbelebung/" aria-label="city concepts"><Wordmark /></a></div></header>
+  <main id="inhalt" class="section section--pastel">
+    <div class="container thanks">
+      <p class="eyebrow">Anfrage eingegangen</p>
+      <h1 class="display">Vielen Dank!</h1>
+      <p class="lead">Wir melden uns innerhalb von <span class="todo">2 Werktagen</span> mit einem Vorschlag für ein Erstgespräch.</p>
+      <h2 class="h3">So geht es weiter</h2>
+      <ol class="list-square">
+        <li>Wir lesen Ihre Angaben und bereiten uns auf Ihre Ausgangslage vor.</li>
+        <li>Wir schlagen Ihnen Termine für ein Erstgespräch vor.</li>
+        <li>Im Gespräch klären wir Ziele, Rahmen und nächste Schritte.</li>
+      </ol>
+      <p><a class="btn btn--ink" href="/innenstadtbelebung/">Zurück zur Seite</a></p>
+    </div>
+  </main>
+</Base>
+<style>
+  .site-header { background: var(--c-white); border-bottom: 1px solid var(--c-line); }
+  .site-header .container { min-height: 5rem; display: flex; align-items: center; }
+  .site-header a { color: var(--c-ink); text-decoration: none; }
+  .thanks { display: flex; flex-direction: column; gap: 1.5rem; max-width: 52rem; margin-inline: 0; }
+  .thanks :global(.display) { text-transform: none; }
+</style>

@@ -11,9 +11,10 @@
 - [ ] Viertes Cluster klären
 
 ## Umsetzung (Claude Code)
-- [ ] Tech-Stack entscheiden (nach Klärung offene Fragen)
-- [ ] Grundgerüst / Design-System
-- [ ] Landingpage 01
+- [x] Tech-Stack entscheiden: Astro, statisch (02.11.2026)
+- [x] Grundgerüst / Design-System (Tokens, Global-CSS, Komponenten)
+- [ ] Landingpage 01 Leitsysteme
+- [x] Landingpage 02 Innenstadtbelebung – Entwurf v1 mit Platzhaltern (`src/pages/innenstadtbelebung.astro`); offen: echte Bilder/Logos, Formular-Versandweg, Tracking, Lighthouse-Lauf, Impressum/Datenschutz/Barrierefreiheit-Seiten
 - [ ] Tracking einbauen
 
 ## Erledigt

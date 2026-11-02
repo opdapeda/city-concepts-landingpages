@@ -9,11 +9,11 @@
 | 02.11.2026 | Vorerst CI-Grün `#AFCA0B` (nicht die Farben aus dem CC-Redesign); Kontrastregeln nach WCAG AA, abgeleitet aus dem CC-Redesign | Redesign noch nicht final abgestimmt |
 | 02.11.2026 | Ergänzend Petrol `#01534E` und Pastellgrün `#CCDDDC` aus dem CC-Redesign – Mischung aus klassischem CD und neuem Ansatz | Moderneres Erscheinungsbild |
 | 02.11.2026 | Quell-PPTX/PDF unter docs/quellen/ nicht im Git (zu groß); stattdessen Textauszüge als .md | GitHub-Limit 100 MB |
+| 02.11.2026 | Framework: Astro (statisch, ohne UI-Framework), Roboto selbst gehostet unter `public/fonts/`; Design-Tokens als CSS-Variablen in `src/styles/tokens.css` | Schlank, schnelle Ladezeiten, mehrere Landingpages mit gemeinsamen Komponenten; Roboto lokal wegen DSGVO |
 
 ## Offene Fragen
 - **Schrift:** Roboto (Unity-Referenz) oder Inter (CC-Redesign)? Vorerst Roboto.
 - **Veröffentlichung:** Wo laufen die statischen Seiten? (Unterverzeichnis von city-concepts.de, Subdomain oder eigene Domain; Hosting/Deployment)
-- **Framework:** z. B. Astro oder reines HTML/CSS – entscheidet Claude Code nach Briefing
 - **Formular:** bestehendes Formular nutzen oder neu? Wohin gehen die Anfragen?
 - **Viertes Cluster:** Thema?
 - **Bildmaterial:** vorhandene Referenzfotos / Projekte nutzbar?
