@@ -19,6 +19,7 @@
   --c-petrol-deep: #013F3B;
   --c-pastel: #CCDDDC;
   --c-pastel-soft: #E6EEEE;
+  --c-wash: #F3F7F7;           /* sehr leichter Pastellverlauf auf Weiß */
 
   /* Typografie */
   --font: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
@@ -29,9 +30,9 @@
   --fs-h3: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem);      /* 28 / 36, -0.5 */
   --fs-h4: 1.25rem;                                        /* 20 / 28 */
   --fs-lead: 1.25rem;                                      /* 20 / 32, Light */
-  --fs-body: 1rem;                                         /* 16 / 26 */
+  --fs-body: 1.125rem;                                     /* 18 / 28 */
   --fs-small: 0.875rem;                                    /* 14 / 22 */
-  --fs-eyebrow: 0.8125rem;                                 /* 13 / 16, +6 */
+  --fs-eyebrow: 0.875rem;                                  /* 14, Bold, Versalien */
 
   /* Layout */
   --container: 82rem;          /* 1312 px */
@@ -39,6 +40,11 @@
   --gap: 2rem;
   --section-y: clamp(4rem, 3rem + 5vw, 7.5rem);
   --radius: 4px;
+  --radius-card: 1.125rem;     /* 18 px Bildkarten */
+  --radius-panel: 1.625rem;    /* 26 px Petrol-Panels */
+  --radius-pill: 999px;
   --shadow-card: 0 2px 12px rgb(31 37 43 / 0.08);
+  --shadow-float: 0 24px 48px rgb(31 37 43 / 0.18);
+  --header-h: 4.75rem;
   --btn-h: 3.375rem;           /* 54 px */
 }

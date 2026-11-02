@@ -1,0 +1,17 @@
+---
+/* Bildkarte: responsive AVIF/WebP + JPG, Radius und Schatten über .photo */
+import { Picture } from 'astro:assets';
+interface Props { src: ImageMetadata; alt: string; sizes: string; eager?: boolean; ratio?: string; class?: string }
+const { src, alt, sizes, eager = false, ratio, class: cls } = Astro.props;
+---
+<div class:list={['photo', cls]} style={ratio ? `--ratio:${ratio}` : undefined}>
+  <Picture
+    src={src} alt={alt} sizes={sizes} widths={[480, 800, 1200]}
+    formats={['avif', 'webp']} fallbackFormat="jpg"
+    loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async"
+  />
+</div>
+<style is:global>
+  .photo { border-radius: var(--radius-card); box-shadow: var(--shadow-float); overflow: hidden; background: var(--c-pastel); transform: translate3d(0, var(--py, 0px), 0) rotate(var(--rot, 0deg)); }
+  .photo img { display: block; width: 100%; height: 100%; aspect-ratio: var(--ratio, auto); object-fit: cover; }
+</style>
