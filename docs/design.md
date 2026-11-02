@@ -103,7 +103,7 @@ Schrift: **Roboto** (Google Fonts, selbst hosten – DSGVO). Das Deck nutzt Aria
 
 ## Gestaltungsmerkmale aus dem Deck
 - Wortmarke „**city** concepts“ (city fett kursiv, concepts kursiv)
-- Großflächige grüne Flächen mit transparenten **diagonalen Pfeil-/Winkelformen** (Wegeleitungs-Motiv)
+- Großflächige grüne Flächen mit transparenten **diagonalen Pfeil-/Winkelformen** (Wegeleitungs-Motiv) – **auf der Landingpage vorerst nicht verwenden** (Entscheidung JPO 02.11.)
 - Panorama-Stadtfotos, helle Karten mit leichtem Schatten, Listen mit quadratischen Bullets
 - Grüne vertikale Akzentbalken an Listenelementen
 - Referenzen als Logo-Wand der Kommunen
@@ -120,3 +120,19 @@ Schrift: **Roboto** (Google Fonts, selbst hosten – DSGVO). Das Deck nutzt Aria
 - Kennzahlen auf Stadtpanorama: 20+ Jahre · 15 Leit- und Orientierungssysteme · 120 begleitete Vergabeverfahren _(Zahlen vor Veröffentlichung bestätigen)_
 - Projektkarten mit Kategorie-Label und Ortsmarke (Pin + Stadtname)
 - Lead-Magnet: „Leitsysteme vergaberechtssicher beschaffen“ – kostenloser Leitfaden (PDF) mit Formular
+
+## Bildsprache Leitsysteme & Stadtraum (verbindlich für generierte Bilder)
+Abgeleitet aus den Referenz-PPTs (`docs/quellen/_kontaktbogen/`, Auswahl in `_kontaktbogen/ref/`). Feedback JPO 02.11.2026.
+- **Leitsysteme modern, nie historisierend:** schlanke anthrazitfarbene Rund- oder Rechteckmasten, weiße/hellgraue Fingerwegweiser mit dunkelblauer Schrift, klare Piktogramme, Meterangaben, Barrierefreiheits-Symbole (Rollstuhl, Steigung in %); dunkelblaue Info-Stelen mit Stadtplan, QR-Code, grüne Nummernkreise. **Kein Gusseisen, keine Nostalgie-Laternen-Optik.**
+- **Haltestellen/Aufwertung:** moderne Glas-/Stahlhäuschen mit farbiger Klebebanderole im oberen Glasbereich (Stadtdesign, z. B. Pixel-Mosaik „Willkommen / Innenstadt →“ wie Ellwangen); Begrünung oder PV nur dezent.
+- **Platzgestaltung:** Holz-Pflanzkästen, Sitzpodeste, Sonnensegel, Corten-Elemente, Kunstobjekte (z. B. Stahl-Pferd).
+- **Innenstädte:** typische, gepflegte und belebte deutsche Mittelstädte (verputzte Fassaden in warmen Tönen, teils Fachwerk) – nicht Heidelberg-Altstadt-Klischee, nicht leer oder trist.
+- Keine lesbaren Marken-/Ladennamen.
+
+## Gestaltungsrichtung v2 (Stand 02.11.2026)
+Favorit JPO: **Richtung B2 „Hell & dynamisch“** in https://www.figma.com/design/kX4gzfIbCpLeEfl7VFx1AO
+- Hero: Text auf Weiß links, rechts Bild-Collage aus überlagernden, leicht gedrehten Bildkarten (Radius 16–20 px, weicher Schatten) auf Pastellfläche, dazu schwebende Kennzahl-Badges – angelehnt an das Unity-Redesign
+- Petrol als eingerückte, abgerundete Panels (nicht vollflächig), Bilder ragen über die Panelkante hinaus
+- Maßnahmen als versetzte Kartenreihe (Stagger), Nummern-Chips in CI-Grün
+- Buttons als Pills (voll gerundet)
+- Keine Pfeil-/Chevron-Grafiken
