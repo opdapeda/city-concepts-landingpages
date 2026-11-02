@@ -464,31 +464,30 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .mass__head { display: grid; gap: 1.25rem; align-items: end; margin-bottom: clamp(2rem, 4vw, 4rem); }
   .mass__head .lead { max-width: 28rem; }
   .mass__cards { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
-  .mcard { background: var(--c-white); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden; display: flex; flex-direction: column; }
+  .mcard { height: 100%; background: var(--c-white); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden; display: flex; flex-direction: column; }
   .mcard__media { position: relative; }
   .mcard :global(.mcard__photo) { border-radius: 0; box-shadow: none; }
   .mcard__body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
-  @media (min-width: 40rem) { .mass__cards { grid-template-columns: repeat(2, 1fr); } .mcard:nth-child(even) { margin-top: 2.5rem; } }
+  @media (min-width: 40rem) { .mass__cards { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 62rem) {
     .mass__head { grid-template-columns: 1fr 1fr; gap: 4rem; }
     .mass__head .lead { justify-self: end; }
-    .mass__cards { grid-template-columns: repeat(4, 1fr); align-items: start; }
-    .mcard:nth-child(even) { margin-top: 2.5rem; }
+    .mass__cards { grid-template-columns: repeat(4, 1fr); }
   }
 
   /* ---------- Beteiligung ---------- */
-  .bet { padding-block: calc(var(--section-y) + 3rem) var(--section-y); }
-  .bet__panel { display: grid; gap: 2rem; padding: clamp(1.5rem, 4vw, 4rem); padding-top: 0; }
-  .bet__media { position: relative; margin-top: -3rem; margin-inline: -0.5rem 0; }
-  :global(.bet__img) { --rot: -2deg; }
-  .badge--c { right: 1rem; bottom: -1.25rem; }
-  .bet__text { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; padding-top: 1rem; }
+  .bet { padding-block: var(--section-y); }
+  .bet__panel { display: grid; overflow: hidden; }
+  .bet__media { position: relative; min-height: 16rem; }
+  .bet__media :global(.bet__img) { position: absolute; inset: 0; height: 100%; border-radius: 0; box-shadow: none; transform: none; }
+  .badge--c { right: 1rem; bottom: 1rem; }
+  .bet__text { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; padding: clamp(1.5rem, 4vw, 4rem); }
   .bet__text .eyebrow { margin-bottom: 0; }
   .bet__list { display: grid; gap: 0.5rem 2rem; font-size: var(--fs-small); margin-bottom: 0.75rem; }
   .bet__list li + li { margin-top: 0; }
   @media (min-width: 62rem) {
-    .bet__panel { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 4rem; align-items: center; padding-top: clamp(2rem, 4vw, 4rem); }
-    .bet__media { margin-top: -6rem; margin-left: -3rem; margin-block-end: 0; }
+    .bet__panel { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+    .bet__media { min-height: 100%; }
     .bet__list { grid-template-columns: 1fr 1fr; }
   }
 
