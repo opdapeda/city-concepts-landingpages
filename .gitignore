@@ -1,0 +1,39 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+
+# Dependencies & build output (stack-agnostisch)
+node_modules/
+dist/
+build/
+out/
+.next/
+.nuxt/
+.astro/
+.svelte-kit/
+.cache/
+.turbo/
+.vercel/
+.netlify/
+coverage/
+
+# Env & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Claude Code (lokal)
+.claude/settings.local.json
