@@ -17,7 +17,8 @@
 - [ ] Finale Hero-Bilder hochskalieren (aktuell 1376 px breit, Ziel ≥ 2560 px)
 - [ ] Echte Projektfotos ablegen → assets/projekte/ (JPO)
 - [x] Umsetzung v2 in Claude Code (02.11.2026) → Auftrag: docs/umsetzung-v2-innenstadtbelebung.md; Lighthouse lokal: Performance 98, Accessibility 100, SEO 100. Gepusht 02.11.2026, Vercel: https://city-concepts-landingpages.vercel.app/innenstadtbelebung/ (Deployment noch prüfen). Offen: Vergleich mit Figma durch JPO
-- [ ] Logos Kommunen ablegen → assets/logos/ (JPO)
+- [x] Logos Kommunen (28) aus Sales Paper Innenstadt, Folie 10, extrahiert → assets/logos/ + src/assets/logos/; Logo-Banderole `src/components/LogoBand.astro` eingebaut (Cowork, 02.11.) – Build lokal getestet, **noch committen**
+- [ ] Freigabe zur Nutzung der Kommunen-Logos auf der Website klären
 
 ## Umsetzung (Claude Code)
 - [x] Tech-Stack entscheiden: Astro, statisch (02.11.2026)

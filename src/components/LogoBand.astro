@@ -1,0 +1,90 @@
+---
+/* Logo-Banderole: Logos der Kommunen in einer Reihe, läuft langsam von rechts nach links,
+   lässt sich per Wischen/Scrollen/Tastatur verschieben; pausiert bei Hover, Fokus und Interaktion.
+   Bei prefers-reduced-motion keine Animation, nur manuelles Scrollen. Logos: src/assets/logos (aus Sales Paper Innenstadt, Folie 10). */
+import { Image } from 'astro:assets';
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/*.png', { eager: true });
+const byName = (n: string) => files[`../assets/logos/${n}.png`]?.default;
+const logos: [string, string][] = [
+  ['heidelberg', 'Stadt Heidelberg'], ['mannheim', 'Stadt Mannheim'], ['ludwigshafen', 'Ludwigshafen am Rhein'],
+  ['freiburg', 'Freiburg im Breisgau'], ['heilbronn', 'Stadt Heilbronn'], ['wittenberg', 'Lutherstadt Wittenberg'],
+  ['aschaffenburg', 'Stadt Aschaffenburg'], ['ellwangen', 'Stadt Ellwangen'], ['deidesheim', 'Verbandsgemeinde Deidesheim'],
+  ['neustadt-weinstrasse', 'Neustadt an der Weinstraße'], ['schwetzingen', 'Stadt Schwetzingen'], ['nagold', 'Stadt Nagold'],
+  ['sinsheim', 'Stadt Sinsheim'], ['viernheim', 'Stadt Viernheim'], ['kreis-gross-gerau', 'Kreis Groß-Gerau'],
+  ['muellheim', 'Müllheim im Markgräflerland'], ['loeffingen', 'Stadt Löffingen'], ['hohen-neuendorf', 'Stadt Hohen Neuendorf'],
+  ['germersheim', 'Stadt Germersheim'], ['waghaeusel', 'Stadt Waghäusel'], ['hirschberg', 'Hirschberg an der Bergstraße'],
+  ['wachenheim', 'Wachenheim an der Weinstraße'], ['schifferstadt', 'Stadt Schifferstadt'], ['hassloch', 'Gemeinde Haßloch'],
+  ['spalt', 'Stadt Spalt'], ['seeheim-jugenheim', 'Gemeinde Seeheim-Jugenheim'], ['herxheim-ortsgemeinde', 'Ortsgemeinde Herxheim'],
+  ['herxheim-verbandsgemeinde', 'Verbandsgemeinde Herxheim'],
+];
+const items = logos.map(([f, alt]) => ({ src: byName(f), alt })).filter((l) => l.src);
+---
+<div class="logoband" data-logoband tabindex="0" role="region" aria-label="Logos von Kommunen, für die city concepts tätig war (horizontal scrollbar)">
+  <ul class="logoband__track">
+    {items.map((l) => (
+      <li class="logoband__item"><Image src={l.src!} alt={l.alt} height={96} loading="lazy" decoding="async" /></li>
+    ))}
+    {items.map((l) => (
+      <li class="logoband__item" aria-hidden="true"><Image src={l.src!} alt="" height={96} loading="lazy" decoding="async" /></li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .logoband {
+    overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    cursor: grab; outline-offset: 4px;
+  }
+  .logoband::-webkit-scrollbar { display: none; }
+  .logoband.is-dragging { cursor: grabbing; }
+  .logoband__track { display: flex; flex-wrap: nowrap; align-items: center; gap: 1rem; width: max-content; padding-block: 0.75rem; margin: 0; list-style: none; }
+  .logoband__item {
+    flex: 0 0 auto; display: grid; place-items: center; height: 5.5rem; padding: 0.9rem 1.6rem;
+    background: var(--c-white); border-radius: 0.875rem; box-shadow: var(--shadow-card);
+  }
+  .logoband__item :global(img) {
+    display: block; height: 3rem; width: auto; max-width: 11rem; object-fit: contain;
+    filter: grayscale(1); opacity: 0.75; transition: filter .3s, opacity .3s; user-select: none; -webkit-user-drag: none;
+  }
+  .logoband__item:hover :global(img), .logoband:focus-visible .logoband__item :global(img) { filter: none; opacity: 1; }
+  @media (max-width: 40rem) { .logoband__item { height: 4.5rem; padding: 0.7rem 1.2rem; } .logoband__item :global(img) { height: 2.4rem; max-width: 8.5rem; } }
+</style>
+
+<script>
+  // Endlos-Lauf per scrollLeft, damit Wischen/Scrollen/Ziehen jederzeit möglich bleibt
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-logoband]').forEach((band) => {
+    const track = band.querySelector<HTMLElement>('.logoband__track')!;
+    const half = () => track.scrollWidth / 2;
+    let paused = false, resumeAt = 0, last = performance.now(), pos = 0;
+    const SPEED = 40; // px pro Sekunde
+    const pause = (ms = 0) => { paused = true; resumeAt = ms ? performance.now() + ms : Infinity; };
+    const resume = () => { paused = false; pos = band.scrollLeft; };
+    band.addEventListener('mouseenter', () => pause());
+    band.addEventListener('mouseleave', () => { if (!dragging) resume(); });
+    band.addEventListener('focusin', () => pause());
+    band.addEventListener('focusout', resume);
+    band.addEventListener('touchstart', () => pause(), { passive: true });
+    band.addEventListener('touchend', () => pause(2500), { passive: true });
+    band.addEventListener('wheel', () => pause(2500), { passive: true });
+    // Ziehen mit der Maus
+    let dragging = false, startX = 0, startLeft = 0;
+    band.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; dragging = true; startX = e.clientX; startLeft = band.scrollLeft; band.classList.add('is-dragging'); band.setPointerCapture(e.pointerId); pause(); });
+    band.addEventListener('pointermove', (e) => { if (dragging) band.scrollLeft = startLeft - (e.clientX - startX); });
+    const end = () => { if (!dragging) return; dragging = false; band.classList.remove('is-dragging'); pause(2500); };
+    band.addEventListener('pointerup', end); band.addEventListener('pointercancel', end);
+    // Tastatur
+    band.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') { band.scrollLeft += 200; e.preventDefault(); } if (e.key === 'ArrowLeft') { band.scrollLeft -= 200; e.preventDefault(); } });
+    // Nahtlose Schleife (auch bei manuellem Scrollen)
+    band.addEventListener('scroll', () => { const h = half(); if (band.scrollLeft >= h) band.scrollLeft -= h; else if (band.scrollLeft <= 0 && paused) band.scrollLeft += h; }, { passive: true });
+    if (reduce) return;
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 64) / 1000; last = now;
+      if (paused && now >= resumeAt) resume();
+      if (!paused && !document.hidden) { pos += SPEED * dt; const h = half(); if (pos >= h) pos -= h; band.scrollLeft = pos; }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+</script>

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Wordmark from '../components/Wordmark.astro';
 import Placeholder from '../components/Placeholder.astro';
 import Photo from '../components/Photo.astro';
+import LogoBand from '../components/LogoBand.astro';
 
 import imgFussgaengerzone from '../assets/innenstadtbelebung/gestaltungssatzung.jpg';
 import imgMoeblierung from '../assets/innenstadtbelebung/moeblierung-begruenung.jpg';
@@ -14,7 +15,6 @@ import imgHaltestelle from '../assets/innenstadtbelebung/aufwertung-haltestelle.
 import imgDigital from '../assets/innenstadtbelebung/digitale-medien.jpg';
 import imgWorkshop from '../assets/innenstadtbelebung/beteiligung-workshop.jpg';
 
-const logos = ['Heidelberg', 'Deidesheim', 'Ellwangen', 'Neustadt a. d. Weinstraße', 'Freiburg', 'Schwetzingen', 'Nagold', 'Sinsheim', 'Wittenberg', 'Mannheim'];
 
 const handlungsfelder = [
   { t: 'Erlebnisort Innenstadt', d: 'Handel, Gastronomie, Kultur und Freizeit zu einem Stadterlebnis verbinden, das Menschen gerne besuchen.' },
@@ -117,8 +117,8 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
       <!-- 3 Logo-Leiste -->
       <section class="logos" aria-labelledby="logos-h">
         <div class="container logos__in">
-          <h2 id="logos-h" class="logos__label">Kommunen, für die wir bereits tätig sein durften <span class="todo">Freigabe Logos klären</span></h2>
-          <ul class="logos__list">{logos.map((l) => <li>{l}</li>)}</ul>
+          <h2 id="logos-h" class="logos__label">Kommunen, für die wir bereits tätig sein durften</h2>
+          <LogoBand />
         </div>
       </section>
 
@@ -438,8 +438,7 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .logos { padding-block: clamp(2rem, 4vw, 3.5rem); }
   .logos__in { display: grid; gap: 1.25rem; }
   .logos__label { font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-petrol); }
-  .logos__list { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .logos__list li { background: var(--c-white); border-radius: 0.75rem; box-shadow: var(--shadow-card); padding: 0.7rem 1.4rem; font-size: var(--fs-small); font-weight: 500; color: var(--c-ink); }
+  .logos__in > * { min-width: 0; }
   @media (min-width: 62rem) { .logos__in { grid-template-columns: 11rem 1fr; align-items: center; gap: 2rem; } }
 
   /* ---------- Handlungsfelder ---------- */

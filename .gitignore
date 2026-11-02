@@ -43,3 +43,6 @@ docs/quellen/**/*.pptx
 docs/quellen/**/*.key
 docs/quellen/**/*.pdf
 .vercel
+
+# Cowork-Ausgaben (Vorschauen, Übersichten)
+Claude outputs/
