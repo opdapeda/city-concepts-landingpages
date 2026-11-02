@@ -1,8 +1,13 @@
 ---
-interface Props { class?: string }
+/* Originallogo city concepts (Quelle: city-concepts.de). variant="light" für dunkle Flächen. */
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/city-concepts-logo.png';
+import logoWhite from '../assets/brand/city-concepts-logo-white.png';
+interface Props { class?: string; variant?: 'dark' | 'light' }
+const { class: cls, variant = 'dark' } = Astro.props;
 ---
-<span class:list={['wordmark', Astro.props.class]}><b>city</b> concepts</span>
+<Image class:list={['wordmark', cls]} src={variant === 'light' ? logoWhite : logo} alt="city concepts" height={70} width={374} loading="eager" decoding="async" />
 <style>
-  .wordmark { font-style: italic; font-weight: 400; font-size: 1.5rem; letter-spacing: -0.02em; line-height: 1; }
-  .wordmark b { font-weight: 700; }
+  .wordmark { display: block; height: 1.875rem; width: auto; }
+  @media (max-width: 40rem) { .wordmark { height: 1.5rem; } }
 </style>

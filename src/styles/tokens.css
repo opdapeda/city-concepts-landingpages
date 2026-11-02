@@ -31,7 +31,7 @@
   --fs-h4: 1.25rem;                                        /* 20 / 28 */
   --fs-lead: 1.25rem;                                      /* 20 / 32, Light */
   --fs-body: 1.125rem;                                     /* 18 / 28 */
-  --fs-small: 0.875rem;                                    /* 14 / 22 */
+  --fs-small: 1rem;                                        /* 16 / 24 – Mindestgröße für Fließtext (vorher 14) */
   --fs-eyebrow: 0.875rem;                                  /* 14, Bold, Versalien */
 
   /* Layout */

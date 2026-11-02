@@ -20,6 +20,12 @@
 - [x] Logos Kommunen (28) aus Sales Paper Innenstadt, Folie 10, extrahiert → assets/logos/ + src/assets/logos/; Logo-Banderole `src/components/LogoBand.astro` eingebaut (Cowork, 02.11.) – Build lokal getestet, **noch committen**
 - [ ] Freigabe zur Nutzung der Kommunen-Logos auf der Website klären
 
+- [x] Schriftgrößen: Mindestgröße Fließtext 16 px (--fs-small), Beteiligungs-Liste und Kundenstimmen-Namen 18 px (Cowork, 02.11.)
+- [x] Originallogo city concepts (von city-concepts.de, PNG 374×70) in Header/Footer; weiße Variante für Footer – **SVG/Vektor-Logo nachreichen für maximale Schärfe**
+- [x] Kontaktdaten von city-concepts.de: Hans-Bunte-Straße 20, 69123 Heidelberg, 06221 75908-0, info@city-concepts.de; Impressum/Datenschutz verlinken auf city-concepts.de – **noch committen**
+- [ ] E-Mail klären: Startseite nennt info@, Kontaktseite mail@city-concepts.de
+- [ ] Ansprechpartner (Name, Funktion, Foto) für Kontaktbereich
+
 ## Umsetzung (Claude Code)
 - [x] Tech-Stack entscheiden: Astro, statisch (02.11.2026)
 - [x] Grundgerüst / Design-System (Tokens, Global-CSS, Komponenten)
