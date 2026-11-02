@@ -16,7 +16,7 @@
 - [x] Bild moeblierung-begruenung: Ladenschilder neutralisiert (02.11.)
 - [ ] Finale Hero-Bilder hochskalieren (aktuell 1376 px breit, Ziel ≥ 2560 px)
 - [ ] Echte Projektfotos ablegen → assets/projekte/ (JPO)
-- [x] Umsetzung v2 in Claude Code (02.11.2026) → Auftrag: docs/umsetzung-v2-innenstadtbelebung.md; Lighthouse lokal: Performance 98, Accessibility 100, SEO 100. Offen: Push + Vercel-Preview-Link hier eintragen, Vergleich mit Figma durch JPO
+- [x] Umsetzung v2 in Claude Code (02.11.2026) → Auftrag: docs/umsetzung-v2-innenstadtbelebung.md; Lighthouse lokal: Performance 98, Accessibility 100, SEO 100. Gepusht 02.11.2026, Vercel: https://city-concepts-landingpages.vercel.app/innenstadtbelebung/ (Deployment noch prüfen). Offen: Vergleich mit Figma durch JPO
 - [ ] Logos Kommunen ablegen → assets/logos/ (JPO)
 
 ## Umsetzung (Claude Code)
