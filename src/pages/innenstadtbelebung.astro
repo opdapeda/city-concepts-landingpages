@@ -19,11 +19,11 @@ import imgWorkshop from '../assets/innenstadtbelebung/beteiligung-workshop.jpg';
 
 
 const handlungsfelder = [
-  { t: 'Erlebnisort Innenstadt', d: 'Handel, Gastronomie, Kultur und Freizeit zu einem Stadterlebnis verbinden, das Menschen gerne besuchen.' },
-  { t: 'Aufenthaltsqualität & Stadtmöblierung', d: 'Einheitliche Möblierung, Begrünung, Wasser und Schatten, Kunst im öffentlichen Raum und temporäre Aktionen, die Plätze beleben.' },
-  { t: 'Besucherlenkung & Orientierung', d: 'Fußgänger- und touristische Leitsysteme, barrierefreie Information und die Verbindung von analoger und digitaler Orientierung – z. B. vom Bahnhof, Parkhaus oder ÖPNV in die Innenstadt.' },
-  { t: 'Stadtmarketing & Profil', d: 'Ein klares Profil und eine starke Stadtmarke, die Bürgerinnen, Bürger und Gäste emotional an die Innenstadt binden – entwickelt gemeinsam mit den Beteiligten vor Ort.' },
-  { t: 'Räume neu denken', d: 'Leerstände systematisch erfassen und visualisieren (GIS-basiert), neue Nutzungen für Kultur, Freizeit und Begegnung entwickeln.' },
+  { i: 'M4 9h11v5a5 5 0 01-5 5H9a5 5 0 01-5-5zM15 10h1.5a2.5 2.5 0 010 5H14.5M7 3v3M11 3v3', t: 'Erlebnisort Innenstadt', d: 'Handel, Gastronomie, Kultur und Freizeit zu einem Stadterlebnis verbinden, das Menschen gerne besuchen.' },
+  { i: 'M5 4h14v6H5zM3 13h18v3H3zM6 16v4M18 16v4', t: 'Aufenthaltsqualität & Stadtmöblierung', d: 'Einheitliche Möblierung, Begrünung, Wasser und Schatten, Kunst im öffentlichen Raum und temporäre Aktionen, die Plätze beleben.' },
+  { i: 'M12 2v20M8 22h8M5 3h12l3 2.5L17 8H5zM19 11H7l-3 2.5L7 16h12z', t: 'Besucherlenkung & Orientierung', d: 'Fußgänger- und touristische Leitsysteme, barrierefreie Information und die Verbindung von analoger und digitaler Orientierung – z. B. vom Bahnhof, Parkhaus oder ÖPNV in die Innenstadt.' },
+  { i: 'M3 10v4a1 1 0 001 1h2l9 5V4L6 9H4a1 1 0 00-1 1zM18.5 8.5a5 5 0 010 7', t: 'Stadtmarketing & Profil', d: 'Ein klares Profil und eine starke Stadtmarke, die Bürgerinnen, Bürger und Gäste emotional an die Innenstadt binden – entwickelt gemeinsam mit den Beteiligten vor Ort.' },
+  { i: 'M4 21V8l8-5 8 5v13zM9 21v-6h6v6M12 9v2', t: 'Räume neu denken', d: 'Leerstände systematisch erfassen und visualisieren (GIS-basiert), neue Nutzungen für Kultur, Freizeit und Begegnung entwickeln.' },
 ];
 
 const massnahmen = [
@@ -129,9 +129,9 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
             <p class="eyebrow">Handlungsfelder</p>
             <h2 id="hf-h" class="title">Fünf Hebel für eine lebendige Innenstadt.</h2>
             <ol class="rows">
-              {handlungsfelder.map((h, i) => (
+              {handlungsfelder.map((h) => (
                 <li class="rows__item">
-                  <span class="num">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="rows__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d={h.i} /></svg></span>
                   <div><h3 class="h3">{h.t}</h3><p>{h.d}</p></div>
                 </li>
               ))}
@@ -448,9 +448,10 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   :global(.hf__img) { margin: -3.5rem -1.25rem 2rem 1.25rem; --rot: 0deg; }
   .hf__statement { font-size: clamp(1.625rem, 1.1rem + 1.6vw, 2.5rem); line-height: 1.22; font-weight: 300; letter-spacing: -0.02em; }
   .hf__statement-sub { margin-top: 1.5rem; max-width: 34rem; }
-  .rows__item { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; padding-block: 1.5rem; border-top: 1px solid var(--c-line); }
+  .rows__item { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1rem; padding-block: 1.5rem; border-top: 1px solid var(--c-line); }
   .rows__item:last-child { border-bottom: 1px solid var(--c-line); }
   .rows__item .num { padding-top: 0.5rem; }
+  .rows__icon { width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--c-pastel); color: var(--c-petrol, #01534E); display: grid; place-items: center; }
   .rows__item p { margin-top: 0.4rem; }
   @media (min-width: 62rem) {
     .hf__in { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 5rem; }
