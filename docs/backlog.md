@@ -33,5 +33,7 @@
 - [x] Landingpage 02 Innenstadtbelebung – Entwurf v1 mit Platzhaltern (`src/pages/innenstadtbelebung.astro`); offen: echte Bilder/Logos, Formular-Versandweg, Tracking, Lighthouse-Lauf, Impressum/Datenschutz/Barrierefreiheit-Seiten
 - [ ] Tracking: Ereignisse (CTA-Position, tel, mailto, Formular) sind als Matomo-Events (`_paq`) vorbereitet; Matomo-Snippet und Consent-Lösung fehlen noch
 
+- [x] Projekt-Detail-Overlays (Texte, Bilder, Fakten) aus PPT-Projektreferenzen, `src/data/projekte.ts` + `ProjektDialog.astro` (09.11.2026). Offen: Freigabe Personenfotos (Deidesheim Pressetermin), Ansprechpartner bewusst nicht aufgenommen, Möblierung Ellwangen ohne eigenes Foto ausgelassen
+
 ## Erledigt
 - [x] Repo & Ordnerstruktur angelegt (02.11.2026)

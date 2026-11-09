@@ -4,6 +4,8 @@ import Wordmark from '../components/Wordmark.astro';
 import Placeholder from '../components/Placeholder.astro';
 import Photo from '../components/Photo.astro';
 import LogoBand from '../components/LogoBand.astro';
+import ProjektDialog from '../components/ProjektDialog.astro';
+import { projekte } from '../data/projekte';
 
 import imgFussgaengerzone from '../assets/innenstadtbelebung/gestaltungssatzung.jpg';
 import imgMoeblierung from '../assets/innenstadtbelebung/moeblierung-begruenung.jpg';
@@ -32,13 +34,6 @@ const massnahmen = [
 ];
 
 const formate = ['Workshops und Roundtables', 'Bürgerbefragungen und Beteiligungskonzepte', 'Expertengespräche und Stakeholder-Einbindung', 'Informationsveranstaltungen', 'Prozessbegleitung für die Verwaltung', 'Kommunikations- und Stadtmarketingkonzepte'];
-
-const projekte = [
-  { t: 'Vom Bahnhof in die Innenstadt', tag: 'Besucherlenkung', ort: 'Ellwangen', alt: 'Foto folgt: Wegweisung vom Bahnhof in die Innenstadt Ellwangen' },
-  { t: 'Begrünte Stadtmöblierung für mehr Aufenthaltsqualität', tag: 'Aufenthaltsqualität', ort: null, alt: 'Foto folgt: Begrünte Stadtmöblierung („Aufs richtige Pferd gesetzt“)' },
-  { t: 'Altstadtflair bewahren', tag: 'Werbeanlagensatzung', ort: 'Heidelberg', alt: 'Foto folgt: Altstadtgasse in Heidelberg mit einheitlichen Werbeanlagen' },
-  { t: 'Dem Geißbock auf der Spur', tag: 'Barrierefreies touristisches Leitsystem', ort: 'Deidesheim', alt: 'Foto folgt: Barrierefreies Leitsystem in Deidesheim' },
-];
 
 const stimmen = [
   { q: 'Die Zusammenarbeit mit city concepts war sehr gut und hat hervorragende Ergebnisse gebracht.', wer: 'Verena Kiedaisch', rolle: 'City-Managerin und Wirtschaftsbeauftragte, Stadt Ellwangen' },
@@ -206,10 +201,11 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
         <ul class="proj__grid">
           {projekte.map((p, i) => (
             <li class="pcard reveal" style={`--d:${i * 70}ms`}>
-              <Placeholder ratio="4 / 3" alt={p.alt} />
+              <Photo class="pcard__img" src={p.bilder[0].src} ratio="4 / 3" sizes="(min-width: 62rem) 24vw, (min-width: 40rem) 45vw, 92vw" alt={p.bilder[0].alt} />
               <div class="pcard__body">
-                <p class="pcard__meta"><span class="pcard__tag">{p.tag}</span><span class="pcard__ort">{p.ort ?? <span class="todo">Ort</span>}</span></p>
-                <h3 class="h3">{p.t}</h3>
+                <p class="pcard__meta"><span class="pcard__tag">{p.tag}</span><span class="pcard__ort">{p.ort}</span></p>
+                <h3 class="h3"><button type="button" class="pcard__open" data-open-projekt={p.id} aria-haspopup="dialog">{p.titel}</button></h3>
+                <p class="pcard__more" aria-hidden="true"><span class="pcard__plus"></span>Details ansehen</p>
               </div>
             </li>
           ))}
@@ -339,6 +335,8 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
     </section>
   </main>
 
+  {projekte.map((p) => <ProjektDialog p={p} />)}
+
   <footer class="site-footer on-dark">
     <div class="container site-footer__in">
       <div>
@@ -368,6 +366,7 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   <script>
     import '../scripts/form.ts';
     import '../scripts/page.ts';
+    import '../scripts/projekte.ts';
   </script>
 </Base>
 
@@ -499,7 +498,18 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .pcard__tag { font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--c-text-muted); }
   .pcard__ort { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 500; color: var(--c-petrol); }
   .pcard__ort::before { content: ''; width: 0.6rem; height: 0.6rem; background: var(--c-green); border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
+  .pcard { position: relative; }
   .pcard .h3 { font-size: var(--fs-h4); line-height: 1.4; }
+  .pcard :global(.pcard__img) { box-shadow: var(--shadow-card); transition: translate .25s ease, box-shadow .25s ease; }
+  .pcard:hover :global(.pcard__img) { translate: 0 -4px; box-shadow: var(--shadow-float); }
+  .pcard__open { all: unset; cursor: pointer; text-decoration: underline; text-decoration-color: var(--c-green); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .pcard__open::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-card); }
+  .pcard__open:focus-visible { outline: none; }
+  .pcard__open:focus-visible::after { outline: 2px solid var(--c-ink); outline-offset: 4px; }
+  .pcard__more { display: inline-flex; align-items: center; gap: 0.5rem; font-size: var(--fs-small); font-weight: 500; color: var(--c-petrol); }
+  .pcard__plus { position: relative; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--c-pastel); }
+  .pcard__plus::before, .pcard__plus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 0.7rem; height: 2px; background: var(--c-petrol); translate: -50% -50%; }
+  .pcard__plus::after { rotate: 90deg; }
   @media (min-width: 40rem) { .proj__grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 62rem) { .proj__grid { grid-template-columns: repeat(4, 1fr); } }
   .quotes { display: grid; gap: 2.5rem; margin-top: clamp(3rem, 6vw, 5rem); }
