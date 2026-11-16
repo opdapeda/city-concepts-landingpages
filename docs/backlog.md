@@ -37,3 +37,4 @@
 
 ## Erledigt
 - [x] Repo & Ordnerstruktur angelegt (02.11.2026)
+- [x] Kontaktformular einstufig umgebaut, Anliegen optional inkl. „Etwas anderes“ mit Freitext (16.11.2026). Briefing `docs/cluster/02-innenstadtbelebung.md` S14 beschreibt noch 2 Schritte – Anpassung vorgeschlagen, nicht eigenmächtig geändert

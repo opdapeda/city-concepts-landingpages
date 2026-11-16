@@ -63,7 +63,7 @@ const faq = [
   { q: 'Seid ihr Hersteller von Leitsystemen oder Möbeln?', a: 'Nein. Wir planen herstellerneutral und begleiten die Vergabe an ausführende Firmen.' },
 ];
 
-const anliegen = ['Innenstadtkonzept', 'Aufenthaltsqualität & Möblierung', 'Besucherlenkung', 'Stadtmarketing & Beteiligung', 'Noch offen'];
+const anliegen = ['Innenstadtkonzept', 'Aufenthaltsqualität & Möblierung', 'Besucherlenkung', 'Stadtmarketing & Beteiligung'];
 const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'], ['Ablauf', '#ablauf'], ['FAQ', '#faq']];
 ---
 <Base
@@ -298,33 +298,40 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
 
           <form id="kontakt-form" class="form" action="/danke/" method="post" novalidate>
             <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="gclid" />
-            <p class="form__step" id="step-label" aria-live="polite">Schritt 1 von 2</p>
-
-            <fieldset id="step-1">
-              <legend class="h4">Ihr Anliegen <span class="small">(Mehrfachauswahl möglich)</span></legend>
-              <div class="chips">
-                {anliegen.map((a) => (
-                  <label class="chip"><input type="checkbox" name="anliegen" value={a} /><span>{a}</span></label>
-                ))}
-              </div>
-              <button type="button" class="btn btn--primary" id="next">Weiter</button>
-            </fieldset>
-
-            <fieldset id="step-2" hidden>
-              <legend class="h4">Ihre Angaben</legend>
+            <fieldset>
+              <legend class="h4">Ihre Anfrage</legend>
               <div class="field"><label for="f-kommune">Kommune <span aria-hidden="true">*</span></label><input id="f-kommune" name="kommune" required autocomplete="organization" /></div>
               <div class="field"><label for="f-name">Name <span aria-hidden="true">*</span></label><input id="f-name" name="name" required autocomplete="name" /></div>
-              <div class="field"><label for="f-funktion">Funktion</label><input id="f-funktion" name="funktion" autocomplete="organization-title" /></div>
               <div class="field"><label for="f-mail">E-Mail <span aria-hidden="true">*</span></label><input id="f-mail" name="email" type="email" required autocomplete="email" /></div>
-              <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" name="telefon" type="tel" autocomplete="tel" /></div>
-              <div class="field"><label for="f-msg">Nachricht</label><textarea id="f-msg" name="nachricht" rows="4"></textarea></div>
+
+              <div class="field" role="group" aria-labelledby="f-anliegen-l">
+                <span id="f-anliegen-l" class="field__label">Worum geht es? <span class="small">(optional, Mehrfachauswahl möglich)</span></span>
+                <div class="chips">
+                  {anliegen.map((a) => (
+                    <label class="chip"><input type="checkbox" name="anliegen" value={a} /><span>{a}</span></label>
+                  ))}
+                  <label class="chip"><input type="checkbox" name="anliegen" value="Etwas anderes" id="f-other" aria-controls="f-other-field" /><span>Etwas anderes</span></label>
+                </div>
+              </div>
+              <div class="field" id="f-other-field" hidden>
+                <label for="f-other-text">Ihr Thema</label>
+                <input id="f-other-text" name="anliegen_sonstiges" placeholder="z. B. Gestaltungssatzung, Leerstandsmanagement" />
+              </div>
+
+              <div class="field"><label for="f-msg">Nachricht <span class="small">(optional)</span></label><textarea id="f-msg" name="nachricht" rows="4"></textarea></div>
+
+              <details class="form__more">
+                <summary>Weitere Angaben (Funktion, Telefon)</summary>
+                <div class="field"><label for="f-funktion">Funktion</label><input id="f-funktion" name="funktion" autocomplete="organization-title" /></div>
+                <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" name="telefon" type="tel" autocomplete="tel" /></div>
+              </details>
+
               <div class="field field--check">
                 <input id="f-dsgvo" name="datenschutz" type="checkbox" required />
                 <label for="f-dsgvo">Ich habe die <a href="/datenschutz/">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. <span aria-hidden="true">*</span></label>
               </div>
               <p class="small">* Pflichtfelder</p>
               <div class="form__actions">
-                <button type="button" class="btn btn--white" id="back">Zurück</button>
                 <button type="submit" class="btn btn--primary">Anfrage senden</button>
               </div>
             </fieldset>
@@ -562,9 +569,13 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .person a { color: var(--c-white); }
   .form { background: var(--c-petrol-deep); padding: clamp(1.25rem, 3vw, 2.5rem); border-radius: 1.25rem; }
   .form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
-  .form fieldset[hidden] { display: none; }
+  .field[hidden] { display: none; }
   .form legend { padding: 0; margin-bottom: 1.25rem; color: var(--c-white); }
-  .form__step { font-size: var(--fs-small); margin-bottom: 1rem; color: var(--c-white); }
+  .field__label { font-weight: 500; }
+  .form__more { width: 100%; }
+  .form__more summary { cursor: pointer; font-weight: 500; min-height: 2.75rem; display: flex; align-items: center; }
+  .form__more summary:focus-visible { outline: 2px solid var(--c-white); outline-offset: 3px; }
+  .form__more .field { margin-top: 0.75rem; }
   .chips { display: flex; flex-wrap: wrap; gap: 0.75rem; }
   .chip { position: relative; cursor: pointer; }
   .chip input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }

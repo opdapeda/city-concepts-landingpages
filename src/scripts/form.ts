@@ -1,4 +1,4 @@
-// Kontaktformular: Tracking-Parameter übernehmen, 2 Schritte, Validierung (docs/tracking.md)
+// Kontaktformular: Tracking-Parameter übernehmen, Validierung (docs/tracking.md)
 const form = document.getElementById('kontakt-form') as HTMLFormElement | null;
 
 if (form) {
@@ -8,19 +8,17 @@ if (form) {
     if (el && params.get(k)) el.value = params.get(k)!;
   });
 
-  const step1 = document.getElementById('step-1')!;
-  const step2 = document.getElementById('step-2')!;
-  const label = document.getElementById('step-label')!;
   const errors = document.getElementById('form-errors')!;
+  const other = document.getElementById('f-other') as HTMLInputElement;
+  const otherField = document.getElementById('f-other-field')!;
+  const otherText = document.getElementById('f-other-text') as HTMLInputElement;
 
-  function show(step: 1 | 2) {
-    step1.hidden = step !== 1;
-    step2.hidden = step !== 2;
-    label.textContent = `Schritt ${step} von 2`;
-    (step === 1 ? step1 : step2).querySelector<HTMLElement>('input, button')?.focus();
-  }
-  document.getElementById('next')!.addEventListener('click', () => show(2));
-  document.getElementById('back')!.addEventListener('click', () => show(1));
+  // „Etwas anderes“ blendet ein Freitextfeld für ein eigenes Thema ein
+  other.addEventListener('change', () => {
+    otherField.hidden = !other.checked;
+    if (other.checked) otherText.focus();
+    else otherText.value = '';
+  });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
