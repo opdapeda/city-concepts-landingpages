@@ -535,9 +535,9 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .warum { background: var(--c-pastel-soft); padding-block: var(--section-y); }
   /* Ablauf ist eigener Abschnitt, schließt optisch nahtlos an „Warum“ an (vorher Unterblock mit 4–7 rem Abstand) */
   .warum:has(+ .ablauf) { padding-bottom: 0; }
-  .ablauf { padding-top: clamp(4rem, 8vw, 7rem); }  .args { display: grid; gap: 2rem; margin-top: clamp(2rem, 4vw, 3rem); }
+  .ablauf { padding-top: clamp(4rem, 8vw, 7rem); }
+  .args { display: grid; gap: 2rem; margin-top: clamp(2rem, 4vw, 3rem); }
   .args__item { border-top: 3px solid var(--c-green); padding-top: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
-  .ablauf { margin-top: clamp(4rem, 8vw, 7rem); }
   .steps { display: grid; gap: 2rem; margin-top: clamp(1.5rem, 3vw, 2.5rem); counter-reset: s; }
   .steps__item { position: relative; display: flex; flex-direction: column; gap: 0.5rem; padding-left: 4rem; }
   .steps__no { position: absolute; left: 0; top: 0; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border-radius: 50%; background: var(--c-petrol); color: var(--c-white); font-weight: 700; z-index: 1; }
