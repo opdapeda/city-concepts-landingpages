@@ -38,3 +38,4 @@
 ## Erledigt
 - [x] Repo & Ordnerstruktur angelegt (02.11.2026)
 - [x] Kontaktformular einstufig umgebaut, Anliegen optional inkl. „Etwas anderes“ mit Freitext (16.11.2026). Briefing `docs/cluster/02-innenstadtbelebung.md` S14 beschreibt noch 2 Schritte – Anpassung vorgeschlagen, nicht eigenmächtig geändert
+- [x] Barrierefreiheits-Durchlauf Innenstadtbelebung (16.11.2026): Überschriftenhierarchie (Ablauf als eigener H2-Abschnitt), SVG-Attribute, eindeutige Dialog-CTA-Namen, Klickflächen ≥ 24 px, Fehlertexte je Formularfeld (aria-invalid/aria-describedby), Logo-Band mit Pausieren-Button und aria-hidden-Duplikat, Gerüst `/barrierefreiheit/`; axe-core ohne Befunde. Offen: Inhalte der Barrierefreiheitserklärung (alle `.todo`) fachlich/rechtlich klären, Datenschutz-Link im Formular (21 px hoch, bewusst unverändert), manuelle Screenreader-Prüfung
