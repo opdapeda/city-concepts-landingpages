@@ -19,18 +19,26 @@ const logos: [string, string][] = [
 ];
 const items = logos.map(([f, alt]) => ({ src: byName(f), alt })).filter((l) => l.src);
 ---
-<div class="logoband" data-logoband tabindex="0" role="region" aria-label="Logos von Kommunen, für die city concepts tätig war (horizontal scrollbar)">
-  <ul class="logoband__track">
-    {items.map((l) => (
-      <li class="logoband__item"><Image src={l.src!} alt={l.alt} height={96} loading="lazy" decoding="async" /></li>
-    ))}
-    {items.map((l) => (
-      <li class="logoband__item" aria-hidden="true"><Image src={l.src!} alt="" height={96} loading="lazy" decoding="async" /></li>
-    ))}
-  </ul>
+<div class="logoband-wrap">
+  <div class="logoband" data-logoband tabindex="0" role="region" aria-label="Logos von Kommunen, für die city concepts tätig war (horizontal scrollbar)">
+    <div class="logoband__track">
+      <ul class="logoband__set">
+        {items.map((l) => (
+          <li class="logoband__item"><Image src={l.src!} alt={l.alt} height={96} loading="lazy" decoding="async" /></li>
+        ))}
+      </ul>
+      <ul class="logoband__set" aria-hidden="true">
+        {items.map((l) => (
+          <li class="logoband__item"><Image src={l.src!} alt="" height={96} loading="lazy" decoding="async" /></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <button type="button" class="logoband__toggle" data-logoband-toggle>Banderole anhalten</button>
 </div>
 
 <style>
+  .logoband-wrap { min-width: 0; }
   .logoband {
     overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch;
     mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
@@ -38,7 +46,10 @@ const items = logos.map(([f, alt]) => ({ src: byName(f), alt })).filter((l) => l
   }
   .logoband::-webkit-scrollbar { display: none; }
   .logoband.is-dragging { cursor: grabbing; }
-  .logoband__track { display: flex; flex-wrap: nowrap; align-items: center; gap: 1rem; width: max-content; padding-block: 0.75rem; margin: 0; list-style: none; }
+  .logoband__track { display: flex; flex-wrap: nowrap; align-items: center; gap: 1rem; width: max-content; padding-block: 0.75rem; }
+  .logoband__set { display: flex; flex-wrap: nowrap; align-items: center; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+  .logoband__toggle { margin-top: 0.25rem; min-height: 2rem; padding: 0.25rem 0; border: 0; background: none; color: var(--c-ink); font-size: var(--fs-small); font-weight: 500; text-decoration: underline; text-underline-offset: 0.2em; cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { .logoband__toggle { display: none; } }
   .logoband__item {
     flex: 0 0 auto; display: grid; place-items: center; height: 5.5rem; padding: 0.9rem 1.6rem;
     background: var(--c-white); border-radius: 0.875rem; box-shadow: var(--shadow-card);
@@ -57,7 +68,7 @@ const items = logos.map(([f, alt]) => ({ src: byName(f), alt })).filter((l) => l
   document.querySelectorAll<HTMLElement>('[data-logoband]').forEach((band) => {
     const track = band.querySelector<HTMLElement>('.logoband__track')!;
     const half = () => track.scrollWidth / 2;
-    let paused = false, resumeAt = 0, last = performance.now(), pos = 0;
+    let paused = false, userPaused = false, resumeAt = 0, last = performance.now(), pos = 0;
     const SPEED = 40; // px pro Sekunde
     const pause = (ms = 0) => { paused = true; resumeAt = ms ? performance.now() + ms : Infinity; };
     const resume = () => { paused = false; pos = band.scrollLeft; };
@@ -78,11 +89,18 @@ const items = logos.map(([f, alt]) => ({ src: byName(f), alt })).filter((l) => l
     band.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') { band.scrollLeft += 200; e.preventDefault(); } if (e.key === 'ArrowLeft') { band.scrollLeft -= 200; e.preventDefault(); } });
     // Nahtlose Schleife (auch bei manuellem Scrollen)
     band.addEventListener('scroll', () => { const h = half(); if (band.scrollLeft >= h) band.scrollLeft -= h; else if (band.scrollLeft <= 0 && paused) band.scrollLeft += h; }, { passive: true });
+    // Pausieren-Schalter (WCAG 2.2.2): hält den Lauf dauerhaft an, bis er wieder gestartet wird
+    const toggle = band.parentElement?.querySelector<HTMLButtonElement>('[data-logoband-toggle]');
+    toggle?.addEventListener('click', () => {
+      userPaused = !userPaused;
+      toggle.textContent = userPaused ? 'Banderole fortsetzen' : 'Banderole anhalten';
+      if (!userPaused) pos = band.scrollLeft;
+    });
     if (reduce) return;
     const tick = (now: number) => {
       const dt = Math.min(now - last, 64) / 1000; last = now;
       if (paused && now >= resumeAt) resume();
-      if (!paused && !document.hidden) { pos += SPEED * dt; const h = half(); if (pos >= h) pos -= h; band.scrollLeft = pos; }
+      if (!paused && !userPaused && !document.hidden) { pos += SPEED * dt; const h = half(); if (pos >= h) pos -= h; band.scrollLeft = pos; }
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);

@@ -1,0 +1,65 @@
+---
+/* Gerüst der Barrierefreiheitserklärung. Alle Angaben, die eine fachliche oder rechtliche Prüfung brauchen,
+   sind als .todo markiert und dürfen nicht ungeprüft veröffentlicht werden (docs/backlog.md). */
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+---
+<Base title="Erklärung zur Barrierefreiheit | city concepts" description="Erklärung zur Barrierefreiheit der Landingpages von city concepts.">
+  <header class="site-header"><div class="container"><a href="/innenstadtbelebung/" aria-label="city concepts – zur Landingpage"><Wordmark /></a></div></header>
+  <main id="inhalt" class="section">
+    <div class="container a11y">
+      <p class="eyebrow">Barrierefreiheit</p>
+      <h1 class="title">Erklärung zur Barrierefreiheit</h1>
+      <p class="lead">city concepts, eine Marke der unity concepts GmbH, möchte seine Landingpages für möglichst viele Menschen zugänglich machen. <span class="todo">Rechtsgrundlage (z. B. BFSG, BITV 2.0) und Geltungsbereich fachlich/rechtlich klären</span></p>
+
+      <section aria-labelledby="a-stand">
+        <h2 id="a-stand" class="h3">Stand der Vereinbarkeit</h2>
+        <p><span class="todo">Einstufung nach Prüfung eintragen (vollständig / teilweise / nicht vereinbar mit den Anforderungen) und Bezug auf den Prüfmaßstab, z. B. WCAG 2.1 AA</span></p>
+      </section>
+
+      <section aria-labelledby="a-nicht">
+        <h2 id="a-nicht" class="h3">Nicht barrierefreie Inhalte</h2>
+        <p><span class="todo">Bekannte Mängel, Begründung (z. B. unverhältnismäßige Belastung, außerhalb des Anwendungsbereichs) und ggf. barrierefreie Alternativen nach der Prüfung aufführen</span></p>
+      </section>
+
+      <section aria-labelledby="a-erstellung">
+        <h2 id="a-erstellung" class="h3">Erstellung der Erklärung</h2>
+        <p>Diese Erklärung wurde am <span class="todo">Datum</span> erstellt. Die Bewertung beruht auf <span class="todo">Prüfmethode (Selbstbewertung / externe Prüfung) und eingesetzte Werkzeuge</span>.</p>
+      </section>
+
+      <section aria-labelledby="a-feedback">
+        <h2 id="a-feedback" class="h3">Feedback und Kontakt</h2>
+        <p>Barrieren melden Sie uns bitte über diesen Kontakt: <span class="todo">Ansprechperson, E-Mail, Telefon, Postadresse</span></p>
+        <p><span class="todo">Zugesagte Antwortfrist festlegen</span></p>
+      </section>
+
+      <section aria-labelledby="a-durchsetzung">
+        <h2 id="a-durchsetzung" class="h3">Durchsetzungsverfahren / Schlichtungsstelle</h2>
+        <p><span class="todo">Zuständige Stelle (Schlichtungsstelle bzw. Marktüberwachungsbehörde), Anschrift und Hinweis zum Verfahren rechtlich prüfen und eintragen</span></p>
+      </section>
+
+      <p><a class="btn btn--ink" href="/innenstadtbelebung/">Zurück zur Seite</a></p>
+    </div>
+  </main>
+  <footer class="site-footer on-dark">
+    <div class="container">
+      <nav aria-label="Rechtliches">
+        <ul>
+          <li><a href="https://city-concepts.de/impressum/">Impressum</a></li>
+          <li><a href="https://city-concepts.de/datenschutz/">Datenschutz</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</Base>
+<style>
+  .site-header { background: var(--c-white); border-bottom: 1px solid var(--c-line); }
+  .site-header .container { min-height: 5rem; display: flex; align-items: center; }
+  .site-header a { color: var(--c-ink); text-decoration: none; }
+  .a11y { display: flex; flex-direction: column; gap: 2rem; max-width: 52rem; margin-inline: 0; }
+  .a11y section { display: flex; flex-direction: column; gap: 0.75rem; }
+  .a11y :global(.btn) { align-self: flex-start; }
+  .site-footer { background: var(--c-ink); color: var(--c-white); padding-block: 2rem; }
+  .site-footer a { color: var(--c-white); display: inline-block; padding-block: 0.25rem; }
+  .site-footer ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+</style>

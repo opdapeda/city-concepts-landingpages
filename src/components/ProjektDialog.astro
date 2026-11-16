@@ -50,7 +50,7 @@ const fakten = [{ label: 'Kunde', wert: p.kunde }, ...p.zeitraum.map((z) => ({ l
           <figcaption><strong>{p.stimme.wer}</strong>, {p.stimme.rolle}</figcaption>
         </figure>
       )}
-      <a class="btn btn--primary pdlg__cta" href="#kontakt" data-close data-track-pos={`projekt-${p.id}`}>Ähnliches Projekt anfragen</a>
+      <a class="btn btn--primary pdlg__cta" href="#kontakt" data-close data-track-pos={`projekt-${p.id}`}>Ähnliches Projekt anfragen<span class="visually-hidden">: {p.titel}</span></a>
     </div>
   </div>
 </dialog>
