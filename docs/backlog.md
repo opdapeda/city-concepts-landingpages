@@ -24,7 +24,7 @@
 - [x] Originallogo city concepts (von city-concepts.de, PNG 374×70) in Header/Footer; weiße Variante für Footer – **SVG/Vektor-Logo nachreichen für maximale Schärfe**
 - [x] Kontaktdaten von city-concepts.de: Hans-Bunte-Straße 20, 69123 Heidelberg, 06221 75908-0, info@city-concepts.de; Impressum/Datenschutz verlinken auf city-concepts.de – **noch committen**
 - [ ] E-Mail klären: Startseite nennt info@, Kontaktseite mail@city-concepts.de
-- [x] Ansprechpartnerin Miriam Berberich (Foto, Durchwahl +49 6221 75 90 824) als Kachel im Kontaktbereich (16.11.2026). Offen: persönliche E-Mail-Adresse (aktuell info@city-concepts.de), Funktion, Foto-Freigabe
+- [x] Ansprechpartnerin Miriam Berberich (Foto, Durchwahl +49 6221 75 90 824) als Kachel im Kontaktbereich (16.11.2026). E-Mail mb@city-concepts.de. Offen: Funktion, Foto-Freigabe
 
 ## Umsetzung (Claude Code)
 - [x] Tech-Stack entscheiden: Astro, statisch (02.11.2026)
