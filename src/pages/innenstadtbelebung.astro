@@ -15,6 +15,7 @@ import imgBesucherlenkung from '../assets/innenstadtbelebung/besucherlenkung.jpg
 import imgPlatz from '../assets/innenstadtbelebung/platzgestaltung.jpg';
 import imgHaltestelle from '../assets/innenstadtbelebung/aufwertung-haltestelle.jpg';
 import imgDigital from '../assets/innenstadtbelebung/digitale-medien.jpg';
+import imgMiriam from '../assets/innenstadtbelebung/miriam-berberich.jpg';
 import imgWorkshop from '../assets/innenstadtbelebung/beteiligung-workshop.jpg';
 
 
@@ -301,10 +302,19 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
             <p class="eyebrow">Kontakt</p>
             <h2 id="kontakt-h" class="title">Lassen Sie uns über Ihre Innenstadt sprechen.</h2>
             <p class="lead">Erzählen Sie uns von Ihrer Ausgangslage – wir melden uns innerhalb von <span class="todo">2 Werktagen</span> mit einem Vorschlag für ein Erstgespräch.</p>
-            <div class="person">
-              <Placeholder class="person__img" ratio="1 / 1" alt="Foto Ansprechpartner:in" />
-              <p><span class="todo">Name, Funktion</span><br />city concepts · Hans-Bunte-Straße 20 · 69123 Heidelberg<br /><a href="tel:+496221759080" data-track-pos="kontakt">06221 75908-0</a><br /><a href="mailto:info@city-concepts.de" data-track-pos="kontakt">info@city-concepts.de</a></p>
-            </div>
+            <aside class="person" aria-labelledby="person-h">
+              <Photo class="person__img" src={imgMiriam} alt="Miriam Berberich, Ihre Ansprechpartnerin bei city concepts" sizes="(min-width: 62rem) 30rem, 90vw" ratio="16 / 10" />
+              <div class="person__body">
+                <p class="person__name" id="person-h">Miriam Berberich</p>
+                <p class="person__role">Ihre persönliche Ansprechpartnerin</p>
+                <p class="person__text">Sie möchten lieber direkt sprechen? Rufen Sie mich gerne an oder schreiben Sie mir eine E-Mail – ich freue mich auf Ihre Fragen.</p>
+                <p class="person__links">
+                  <a class="btn btn--primary" href="tel:+496221759824" data-track-pos="kontakt-person">+49 6221 75 90 824</a>
+                  <a class="person__mail" href="mailto:info@city-concepts.de" data-track-pos="kontakt-person">info@city-concepts.de</a>
+                </p>
+              </div>
+            </aside>
+            <p class="small contact__addr">city concepts · Hans-Bunte-Straße 20 · 69123 Heidelberg</p>
           </div>
 
           <form id="kontakt-form" class="form" action="/danke/" method="post" novalidate>
@@ -588,10 +598,17 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .contact { display: grid; gap: 2.5rem; padding: clamp(1.5rem, 4vw, 4rem); }
   .contact__intro { display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
   .contact__intro .eyebrow { margin-bottom: 0; }
-  .person { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; }
-  .person :global(.person__img) { width: 6rem; flex: none; border-radius: 50%; }
-  .person :global(.ph__text), .person :global(.ph__src) { display: none; }
-  .person a { color: var(--c-white); }
+  .person { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 1rem; padding: 0.75rem 0.75rem 1.5rem; background: var(--c-white); color: var(--c-text); border-radius: var(--radius-card); box-shadow: var(--shadow-float); width: 100%; max-width: 34rem; }
+  .person :global(.person__img) { box-shadow: none; border-radius: calc(var(--radius-card) - 0.25rem); }
+  .person :global(.person__img img) { object-position: 50% 22%; }
+  .person__body { padding-inline: 0.75rem; display: flex; flex-direction: column; gap: 0.35rem; align-items: flex-start; }
+  .person__name { margin: 0; font-weight: 700; font-size: 1.25rem; color: var(--c-petrol); }
+  .person__role { margin: 0; font-size: 0.875rem; color: var(--c-text-muted); }
+  .person__text { margin: 0.35rem 0 0.5rem; color: var(--c-text); }
+  .person__links :global(.btn) { white-space: nowrap; }
+  .person__links { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
+  .person__mail { color: var(--c-petrol); text-decoration: underline; text-underline-offset: 0.2em; overflow-wrap: anywhere; }
+  .contact__addr { margin: 0; }
   .form { background: var(--c-petrol-deep); padding: clamp(1.25rem, 3vw, 2.5rem); border-radius: 1.25rem; }
   .form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
   .field[hidden] { display: none; }
@@ -630,7 +647,7 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .site-footer ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 
   /* Klickflächen ≥ 24 px (WCAG 2.5.8): Padding vergrößert die Fläche, der negative Rand hält das Layout unverändert */
-  .hero__tel a, .person a, .site-footer a { display: inline-block; padding-block: 0.25rem; margin-block: -0.25rem; }
+  .hero__tel a, .person__mail, .site-footer a { display: inline-block; padding-block: 0.25rem; margin-block: -0.25rem; }
 
   /* ---------- Sticky-CTA (Mobile) ---------- */
   .sticky-cta { position: fixed; z-index: 60; left: 0; right: 0; bottom: 0; display: flex; gap: 0.75rem; padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom)); background: var(--c-white); box-shadow: 0 -6px 24px rgb(31 37 43 / 0.14); transition: translate .25s; }
