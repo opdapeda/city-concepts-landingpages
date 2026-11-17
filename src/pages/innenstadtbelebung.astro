@@ -70,6 +70,7 @@ const faq = [
   { q: 'Sind Sie Hersteller von Leitsystemen oder Möbeln?', a: 'Nein. Wir planen herstellerneutral und begleiten die Vergabe an ausführende Firmen.' },
 ];
 
+const zeitfenster = ['Vormittags (9–12 Uhr)', 'Mittags (12–14 Uhr)', 'Nachmittags (14–17 Uhr)'];
 const anliegen = ['Innenstadtkonzept', 'Aufenthaltsqualität & Möblierung', 'Besucherlenkung', 'Stadtmarketing & Beteiligung'];
 const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'], ['Ablauf', '#ablauf'], ['FAQ', '#faq']];
 ---
@@ -332,6 +333,13 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
             <p class="small contact__addr">city concepts · Hans-Bunte-Straße 20 · 69123 Heidelberg</p>
           </div>
 
+          <div class="form-card">
+          <div class="form-tabs" role="tablist" aria-label="Art der Kontaktaufnahme">
+            <button type="button" role="tab" id="tab-anfrage" class="form-tabs__tab" aria-selected="true" aria-controls="panel-anfrage">Anfrage</button>
+            <button type="button" role="tab" id="tab-rueckruf" class="form-tabs__tab" aria-selected="false" aria-controls="panel-rueckruf" tabindex="-1">Rückruf</button>
+          </div>
+
+          <div role="tabpanel" id="panel-anfrage" aria-labelledby="tab-anfrage">
           <form id="kontakt-form" class="form" action="/danke/" method="post" novalidate>
             <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="gclid" />
             <fieldset>
@@ -364,15 +372,49 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
 
               <div class="field field--check">
                 <input id="f-dsgvo" name="datenschutz" type="checkbox" required />
-                <label for="f-dsgvo">Ich habe die <a href="/datenschutz/">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. <span aria-hidden="true">*</span></label>
+                <label for="f-dsgvo">Ich habe die <a href="https://city-concepts.de/datenschutz/">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. <span aria-hidden="true">*</span></label>
               </div>
               <p class="small">* Pflichtfelder</p>
               <div class="form__actions">
                 <button type="submit" class="btn btn--primary">Anfrage senden</button>
               </div>
             </fieldset>
-            <div class="form__errors" id="form-errors" role="alert" tabindex="-1" hidden></div>
+            <div class="form__errors" role="alert" tabindex="-1" hidden></div>
           </form>
+          </div>
+
+          <div role="tabpanel" id="panel-rueckruf" aria-labelledby="tab-rueckruf" hidden>
+          <form id="rueckruf-form" class="form" action="/danke/" method="post" novalidate>
+            <input type="hidden" name="formular" value="rueckruf" />
+            <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="gclid" />
+            <fieldset>
+              <legend class="h4">Wir rufen Sie zurück</legend>
+              <p class="form__hint">Wählen Sie einen Werktag und ein Zeitfenster – wir melden uns dann telefonisch bei Ihnen.</p>
+              <div class="field"><label for="r-kommune">Kommune <span aria-hidden="true">*</span></label><input id="r-kommune" name="kommune" required autocomplete="organization" /></div>
+              <div class="field"><label for="r-name">Name <span aria-hidden="true">*</span></label><input id="r-name" name="name" required autocomplete="name" /></div>
+              <div class="field"><label for="r-tel">Telefonnummer (Mobil oder dienstlich) <span aria-hidden="true">*</span></label><input id="r-tel" name="telefon" type="tel" required autocomplete="tel" inputmode="tel" /></div>
+              <div class="field"><label for="r-datum">Wunschtag <span aria-hidden="true">*</span></label><input id="r-datum" name="rueckruf_datum" type="date" required /></div>
+              <div class="field" id="r-zeit" role="radiogroup" aria-labelledby="r-zeit-l" aria-required="true">
+                <span id="r-zeit-l" class="field__label">Wunschzeit <span aria-hidden="true">*</span></span>
+                <div class="chips">
+                  {zeitfenster.map((z) => (
+                    <label class="chip"><input type="radio" name="rueckruf_zeit" value={z} /><span>{z}</span></label>
+                  ))}
+                </div>
+              </div>
+              <div class="field field--check">
+                <input id="r-dsgvo" name="datenschutz" type="checkbox" required />
+                <label for="r-dsgvo">Ich habe die <a href="https://city-concepts.de/datenschutz/">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung des Rückrufwunsches einverstanden. <span aria-hidden="true">*</span></label>
+              </div>
+              <p class="small">* Pflichtfelder</p>
+              <div class="form__actions">
+                <button type="submit" class="btn btn--primary">Rückruf anfordern</button>
+              </div>
+            </fieldset>
+            <div class="form__errors" role="alert" tabindex="-1" hidden></div>
+          </form>
+          </div>
+          </div>
         </div>
       </div>
     </section>
@@ -630,7 +672,18 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .person__links { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
   .person__mail { color: var(--c-petrol); text-decoration: underline; text-underline-offset: 0.2em; overflow-wrap: anywhere; }
   .contact__addr { margin: 0; }
-  .form { background: var(--c-petrol-deep); padding: clamp(1.25rem, 3vw, 2.5rem); border-radius: 1.25rem; }
+  .form-card { background: var(--c-petrol-deep); padding: clamp(1.25rem, 3vw, 2.5rem); border-radius: 1.25rem; }
+  /* Umschalter im Stil eines Switches: Schieber gleitet unter den aktiven Eintrag */
+  .form-tabs { position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 4px; margin-bottom: 1.75rem; background: rgb(255 255 255 / 0.14); border: 2px solid var(--c-white); border-radius: var(--radius-pill); isolation: isolate; }
+  .form-tabs::before { content: ''; position: absolute; z-index: -1; inset: 0 auto 0 0; width: 50%; background: var(--c-white); border-radius: var(--radius-pill); transform: translateX(0); transition: transform 0.25s ease; }
+  .form-tabs:has([role='tab']:last-child[aria-selected='true'])::before { transform: translateX(100%); }
+  .form-tabs__tab { font: inherit; font-size: 0.9375rem; font-weight: 500; cursor: pointer; min-height: 2.75rem; padding: 0 0.5rem; color: var(--c-white); background: transparent; border: 0; border-radius: var(--radius-pill); transition: color 0.25s ease; }
+  .form-tabs__tab[aria-selected='true'] { color: var(--c-petrol); font-weight: 700; }
+  .form-tabs__tab:focus-visible { outline: 3px solid var(--c-green); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .form-tabs::before, .form-tabs__tab { transition: none; } }
+  [role='tabpanel'][hidden] { display: none; }
+  .form__hint { margin: 0; }
+  .field input[type='date'] { max-width: 16rem; }
   .form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
   .field[hidden] { display: none; }
   .form legend { padding: 0; margin-bottom: 1.25rem; color: var(--c-white); }

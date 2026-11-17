@@ -6,11 +6,11 @@ import Wordmark from '../components/Wordmark.astro';
   <header class="site-header"><div class="container"><a href="/innenstadtbelebung/" aria-label="city concepts"><Wordmark /></a></div></header>
   <main id="inhalt" class="section section--pastel">
     <div class="container thanks">
-      <p class="eyebrow">Anfrage eingegangen</p>
+      <p class="eyebrow" id="t-eyebrow">Anfrage eingegangen</p>
       <h1 class="display">Vielen Dank!</h1>
-      <p class="lead">Wir melden uns umgehend mit einem Vorschlag für ein Erstgespräch.</p>
+      <p class="lead" id="t-lead">Wir melden uns umgehend mit einem Vorschlag für ein Erstgespräch.</p>
       <h2 class="h3">So geht es weiter</h2>
-      <ol class="list-square">
+      <ol class="list-square" id="t-steps">
         <li>Wir lesen Ihre Angaben und bereiten uns auf Ihre Ausgangslage vor.</li>
         <li>Wir schlagen Ihnen Termine für ein Erstgespräch vor.</li>
         <li>Im Gespräch klären wir Ziele, Rahmen und nächste Schritte.</li>
@@ -18,6 +18,14 @@ import Wordmark from '../components/Wordmark.astro';
       <p><a class="btn btn--ink" href="/innenstadtbelebung/">Zurück zur Seite</a></p>
     </div>
   </main>
+  <script>
+    // Rückruf-Variante der Dankeseite (?formular=rueckruf)
+    if (new URLSearchParams(location.search).get('formular') === 'rueckruf') {
+      document.getElementById('t-eyebrow')!.textContent = 'Rückruf angefordert';
+      document.getElementById('t-lead')!.textContent = 'Wir rufen Sie im gewünschten Zeitfenster zurück.';
+      document.getElementById('t-steps')!.innerHTML = '<li>Wir melden uns am gewählten Tag im gewünschten Zeitfenster telefonisch bei Ihnen.</li><li>Wenn Sie uns nicht erreicht haben, versuchen wir es erneut oder schreiben Ihnen kurz.</li><li>Im Gespräch klären wir Ihre Ausgangslage und vereinbaren das Erstgespräch.</li>';
+    }
+  </script>
 </Base>
 <style>
   .site-header { background: var(--c-white); border-bottom: 1px solid var(--c-line); }

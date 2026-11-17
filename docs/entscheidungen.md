@@ -11,6 +11,7 @@
 | 02.11.2026 | Quell-PPTX/PDF unter docs/quellen/ nicht im Git (zu groß); stattdessen Textauszüge als .md | GitHub-Limit 100 MB |
 | 02.11.2026 | Framework: Astro (statisch, ohne UI-Framework), Roboto selbst gehostet unter `public/fonts/`; Design-Tokens als CSS-Variablen in `src/styles/tokens.css` | Schlank, schnelle Ladezeiten, mehrere Landingpages mit gemeinsamen Komponenten; Roboto lokal wegen DSGVO |
 | 16.11.2026 | Kontaktformular einstufig statt 2 Schritte: Pflichtfelder zuerst, „Worum geht es?“ als optionale Chips inkl. „Etwas anderes“ (blendet Freitext ein); „Noch offen“ entfällt; Funktion/Telefon unter „Weitere Angaben“ | Usability-Test: Formular war nicht als solches erkennbar, Themenauswahl als erster Schritt wirkte wie eine Hürde |
+| 17.11.2026 | Kontaktbereich mit Umschalter „Anfrage“ / „Rückruf“: Rückruf-Formular mit Kommune, Name, Telefon (mobil/dienstlich), Wunschtag (nur Werktage) und Zeitfenster (vormittags 9–12, mittags 12–14, nachmittags 14–17 Uhr); eigene Variante der Dankeseite | Niedrigschwelliger Kontaktweg für Verwaltungen, die lieber telefonieren; Versandweg weiterhin offen |
 
 ## Offene Fragen
 - **Schrift:** Roboto (Unity-Referenz) oder Inter (CC-Redesign)? Vorerst Roboto.
