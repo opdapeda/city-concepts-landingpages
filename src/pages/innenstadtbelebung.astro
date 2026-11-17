@@ -58,7 +58,12 @@ const faq = [
   { q: 'Wofür ist city concepts Experte?', a: 'Wir sind Ihr Partner für Kommunikation, Planung und Strategie in Städten und Gemeinden. Unsere drei Schwerpunkte: Leit- und Orientierungssysteme, Stadtmarketing und Kommunalberatung. Gemeinsam sorgen sie dafür, dass Menschen eine Stadt entdecken, erleben und verstehen.' },
   { q: 'Welche Leistungen bietet city concepts?', a: 'Leit- und Orientierungssysteme machen Verborgenes sichtbar und helfen Gästen wie Einheimischen, sich zurechtzufinden. Im Stadtmarketing entwickeln wir Konzepte, Strategien und Maßnahmen, mit denen Menschen urbane Räume erleben können. Die Kommunalberatung schafft die Grundlage für verständliche Information und Beteiligung. Dazu gehören Projektleitung und Beratung, Analyse und Strategie, Konzeption, Planung, Workshops, Grafik und Gestaltung, Vergabebegleitung sowie die Begleitung der Umsetzung. Die Bausteine lassen sich je nach Bedarf kombinieren.' },
   { q: 'Lohnt sich das auch für kleinere Gemeinden?', a: 'Ja. Viele Maßnahmen sind skalierbar – von einzelnen Plätzen und Wegen bis zum gesamten Innenstadtkonzept.' },
-  { q: 'Gibt es Fördermittel?', a: 'Häufig ja. Neben der Städtebauförderung gibt es Landesprogramme, z. B. „Innenstadt-Impulse“ (Rheinland-Pfalz) oder „Zukunft Innenstadt“ (Hessen). Wir zeigen auf, welche Maßnahmen förderfähig sein können.', todo: 'Programme vor Veröffentlichung prüfen, BW ergänzen' },
+  { q: 'Gibt es Fördermittel?', a: 'Häufig ja. Je nach Bundesland und Vorhaben kommen unterschiedliche Programme infrage. Wir zeigen auf, welche Maßnahmen förderfähig sein können. Beispiele:', links: [
+    { t: 'Städtebauförderung „Lebendige Zentren“ (Bund und Länder)', h: 'https://www.staedtebaufoerderung.info/' },
+    { t: 'Innenstadt-Impulse (Rheinland-Pfalz)', h: 'https://mdi.rlp.de/service/pressemitteilungen/detail/land-stellt-2026-erneut-5-mio-euro-fuer-innenstadt-impulse-bereit' },
+    { t: 'Zukunft Innenstadt (Hessen)', h: 'https://www.foerderdatenbank.de/FDB/Content/DE/Foerderprogramm/Land/Hessen/attraktivitaet-nachhaltigkeit-innenstaedte.html' },
+    { t: 'Städtebauförderung (Baden-Württemberg)', h: 'https://www.foerderdatenbank.de/FDB/Content/DE/Foerderprogramm/Land/Baden-Wuerttemberg/foerderung_staedtebaulicher_entwicklungsmassnahmen.html' },
+  ], note: 'Förderbedingungen und Fristen ändern sich regelmäßig – wir prüfen den aktuellen Stand gerne gemeinsam mit Ihnen.' },
   { q: 'Begleiten Sie auch die Ausschreibung?', a: 'Ja. Wir erstellen Ausführungsplanung und Leistungsverzeichnisse und begleiten das Vergabeverfahren.' },
   { q: 'Wie werden Bürger und Handel eingebunden?', a: 'Über Workshops, Befragungen, Roundtables und Expertengespräche – je nach Projekt und Budget.' },
   { q: 'Wie lange dauert ein Projekt?', todo: 'Spannen nennen, z. B. Konzept 3–6 Monate' },
@@ -290,6 +295,12 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
               <summary><span>{f.q}</span><span class="qa__icon" aria-hidden="true"></span></summary>
               <div class="qa__a">
                 {f.a && <p>{f.a}</p>}
+                {f.links && (
+                  <ul class="qa__links">
+                    {f.links.map((l) => <li><a href={l.h} target="_blank" rel="noopener">{l.t}<span class="visually-hidden"> (öffnet in neuem Tab)</span></a></li>)}
+                  </ul>
+                )}
+                {f.note && <p>{f.note}</p>}
                 {f.todo && <p><span class="todo">{f.todo}</span></p>}
               </div>
             </details>
@@ -599,6 +610,8 @@ const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'],
   .qa__icon::after { rotate: 90deg; }
   .qa[open] .qa__icon::after { rotate: 0deg; }
   .qa__a { padding-bottom: 1.5rem; max-width: 40rem; }
+  .qa__links { margin: 0.5rem 0 1rem; padding-left: 1.25rem; display: grid; gap: 0.35rem; }
+  .qa__links a { color: var(--c-petrol); text-decoration: underline; text-underline-offset: 0.2em; display: inline-block; padding-block: 0.25rem; margin-block: -0.25rem; }
   @media (min-width: 62rem) { .faq__in { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 5rem; } .faq__in > :first-child { position: sticky; top: calc(var(--header-h) + 2rem); } }
 
   /* ---------- Kontakt ---------- */
