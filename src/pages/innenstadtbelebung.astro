@@ -6,6 +6,8 @@ import Photo from '../components/Photo.astro';
 import LogoBand from '../components/LogoBand.astro';
 import ProjektDialog from '../components/ProjektDialog.astro';
 import { projekte } from '../data/projekte';
+import { getImage } from 'astro:assets';
+import logoPng from '../assets/brand/city-concepts-logo.png';
 
 import imgFussgaengerzone from '../assets/innenstadtbelebung/gestaltungssatzung.jpg';
 import imgMoeblierung from '../assets/innenstadtbelebung/moeblierung-begruenung.jpg';
@@ -66,10 +68,70 @@ const faq = [
 
 const anliegen = ['Innenstadtkonzept', 'Aufenthaltsqualität & Möblierung', 'Besucherlenkung', 'Stadtmarketing & Beteiligung'];
 const nav = [['Handlungsfelder', '#handlungsfelder'], ['Projekte', '#projekte'], ['Ablauf', '#ablauf'], ['FAQ', '#faq']];
+
+const seoTitle = 'Innenstadtbelebung für Städte & Gemeinden | city concepts';
+const seoDescription = 'Innenstadt beleben: Analyse, Beteiligung, Konzept und Umsetzung aus einer Hand – herstellerneutral und förderkundig. Jetzt Erstgespräch anfragen.';
+
+// Strukturierte Daten (schema.org). FAQ nur mit fertigen Antworten – Einträge mit .todo bleiben draußen.
+const origin = Astro.site!.origin;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const logo = await getImage({ src: logoPng, width: 600, format: 'png' });
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${origin}/#organization`,
+      name: 'city concepts',
+      legalName: 'unity concepts GmbH',
+      url: 'https://city-concepts.de/',
+      logo: new URL(logo.src, Astro.site).href,
+      telephone: '+496221759080',
+      email: 'info@city-concepts.de',
+      address: { '@type': 'PostalAddress', streetAddress: 'Hans-Bunte-Straße 20', postalCode: '69123', addressLocality: 'Heidelberg', addressCountry: 'DE' },
+      award: 'German Design Award 2027 Winner – Excellent Communications Design, Signage and Wayfinding („Unterwegs mit der Elwetritsche“)',
+      contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', telephone: '+496221759824', email: 'mb@city-concepts.de', areaServed: 'DE', availableLanguage: 'de' },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: seoTitle,
+      description: seoDescription,
+      inLanguage: 'de-DE',
+      isPartOf: { '@id': `${origin}/#website` },
+      about: { '@id': `${pageUrl}#service` },
+    },
+    { '@type': 'WebSite', '@id': `${origin}/#website`, url: origin + '/', name: 'city concepts', inLanguage: 'de-DE', publisher: { '@id': `${origin}/#organization` } },
+    {
+      '@type': 'Service',
+      '@id': `${pageUrl}#service`,
+      name: 'Innenstadtbelebung und Innenstadtentwicklung',
+      serviceType: 'Innenstadtentwicklung',
+      description: seoDescription,
+      provider: { '@id': `${origin}/#organization` },
+      areaServed: { '@type': 'Country', name: 'Deutschland' },
+      audience: { '@type': 'Audience', audienceType: 'Städte, Gemeinden und Kommunalverwaltungen' },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Handlungsfelder',
+        itemListElement: handlungsfelder.map((h) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: h.t, description: h.d } })),
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${pageUrl}#faq`,
+      mainEntity: faq.filter((f) => f.a && !f.todo).map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    },
+  ],
+};
 ---
 <Base
-  title="Innenstadtbelebung & Innenstadtentwicklung | city concepts"
-  description="Konkrete Maßnahmen für eine lebendige Innenstadt: Analyse, Beteiligung, Konzept und Umsetzung – herstellerneutral und förderkundig. Jetzt Erstgespräch anfragen."
+  title={seoTitle}
+  description={seoDescription}
+  ogImage={imgFussgaengerzone}
+  ogImageAlt="Belebte Fußgängerzone einer Innenstadt mit Cafés und Passanten"
+  jsonLd={jsonLd}
 >
   <header class="site-header">
     <div class="container site-header__in">
