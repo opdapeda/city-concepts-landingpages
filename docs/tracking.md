@@ -12,4 +12,8 @@
 - [ ] UTM-/gclid-Übergabe ins Formular (Lead-Quelle nachvollziehbar)
 - [ ] Cookie-/Consent-Lösung klären
 
-_(Details abhängig von Tech-Entscheidung)_
+## Ist-Stand Live-Seite Innenstadtbelebung (18.11.2026)
+- Matomo-Snippet **nicht eingebunden** – Events (`_paq`: CTA-Position, tel, mailto, `form-submit`) sind im Code vorbereitet, werden aber nicht erfasst
+- Kein Google-Ads-Tag, kein Consent-Banner
+- Formulare enthalten versteckte Felder `utm_source`, `utm_medium`, `utm_campaign`, `gclid` – werden mangels Versandweg noch nirgends übergeben
+- Folge: Ohne Fix wären Kampagnen auf die Landingpage nicht messbar und Leads gingen verloren

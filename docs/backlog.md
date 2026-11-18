@@ -26,6 +26,20 @@
 - [ ] E-Mail klären: Startseite nennt info@, Kontaktseite mail@city-concepts.de
 - [x] Ansprechpartnerin Miriam Berberich (Foto, Durchwahl +49 6221 75 90 824) als Kachel im Kontaktbereich (16.11.2026). E-Mail mb@city-concepts.de. Offen: Funktion, Foto-Freigabe
 
+## Go-live-Check Innenstadtbelebung (Chat 02, 18.11.2026)
+Geprüft auf https://city-concepts-landingpages.vercel.app/innenstadtbelebung/ (Code-Stand `c7ac45a`). **Muss vor der DNS-Umstellung erledigt sein:**
+- [ ] **Formularversand fehlt:** Beide Formulare (`#kontakt-form`, `#rueckruf-form`) validieren nur und leiten per JS auf `/danke/` weiter – es werden keine Daten verschickt (nativer POST auf `/danke/` → 405). Versandweg umsetzen (z. B. Vercel-/Serverless-Function → Mail bzw. Zapier-Webhook), UTM/gclid mitschicken
+- [ ] **Matomo nicht eingebunden:** kein Snippet, `_paq`-Events laufen ins Leere. Snippet (matomo.city-concepts.de, Site-ID 2) + Consent-Lösung; Formular-Absendung als Ziel (siehe `tracking.md`)
+- [ ] **Google-Ads-Conversion** für Formular-Absendung fehlt (erfordert Consent-Banner)
+- [ ] **Interne Notiz sichtbar:** „Freigabe der Kundenstimmen für das Web klären“ (`.todo` unter den Kundenstimmen) – Freigabe klären, bis dahin Notiz bzw. Zitate entfernen
+- [ ] **Durchwahl Miriam Berberich falsch verlinkt:** `tel:+496221759824` (Hero + Kontakt) – angezeigt wird +49 6221 75 90 824, richtig wäre `tel:+4962217590824`
+- [ ] **Canonical + og:image fehlen** – nach Umzug canonical auf die finale city-concepts-Adresse setzen, vercel.app-Version auf noindex lassen/umleiten
+- [ ] **Barrierefreiheitserklärung:** Link ist relativ (`/barrierefreiheit/`), Impressum/Datenschutz zeigen auf city-concepts.de – beim Umzug sicherstellen, dass `/barrierefreiheit/` unter der neuen Adresse existiert (Inhalte sind noch `.todo`)
+- [ ] **Bildhinweis Footer** „Symbolbilder (KI-generiert)“ gilt pauschal, Projektreferenzen sind echte Fotos → Hinweis präzisieren (z. B. „Symbolbilder in Hero und Maßnahmen KI-generiert“)
+- [ ] **Kennzahl „30+ Kommunen betreut“** neben Logo-Band mit 28 Kommunen – bestätigen (siehe offene Kennzahlen)
+- [ ] Alt-Text für Award-Logo im Hero (`gda27-winner-farbig.svg`) ergänzen (Logo-Duplikate im Band sind korrekt `aria-hidden`)
+- [ ] Mobile Ansicht nach den letzten Änderungen noch einmal prüfen (im Check nicht getestet)
+
 ## Umsetzung (Claude Code)
 - [x] Tech-Stack entscheiden: Astro, statisch (02.11.2026)
 - [x] Grundgerüst / Design-System (Tokens, Global-CSS, Komponenten)

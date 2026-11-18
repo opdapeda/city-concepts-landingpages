@@ -3,6 +3,7 @@
 Landingpages für **city concepts** (Marke der unity concepts GmbH) zur Lead-Generierung bei der öffentlichen Hand. Pro Themen-Cluster eine eigene Landingpage.
 
 ## Wichtigste Quellen (vor jeder Umsetzung lesen)
+- `docs/verlauf/` – **gemeinsames Gedächtnis aller Sitzungen** (Cowork, Claude Code, Projekt-Chats): zuerst `00-projektuebersicht.md` und die Verlaufsdateien lesen
 - `docs/00-briefing.md` – Unternehmen, Zielgruppe, Tonalität, Ziele
 - `docs/cluster/NN-*.md` – Briefing je Landingpage (Inhalte, Sektionen, CTA, Akzeptanzkriterien)
 - `docs/design.md` – Farben, Typografie, Gestaltungsmerkmale
@@ -17,6 +18,13 @@ Landingpages für **city concepts** (Marke der unity concepts GmbH) zur Lead-Gen
 - Briefings in `docs/cluster/` ändert Claude Code nicht eigenmächtig, sondern schlägt Änderungen vor.
 - **Git (Commit/Push) macht ausschließlich Claude Code.**
 - Neue Entscheidungen mit Datum und Begründung in `docs/entscheidungen.md` eintragen.
+- **Verlauf festhalten:** Am Ende jedes Arbeitsschritts ergänzt jede Sitzung ihre **eigene** Datei in `docs/verlauf/` (Claude Code: `docs/verlauf/02-verlauf-claude-code-umsetzung.md`) – was umgesetzt/entschieden wurde, Feedback von JPO, offene Punkte. Keine fremden Verlaufsdateien überschreiben.
+
+## Abschluss einer Session (Claude Code)
+1. `docs/backlog.md` aktualisieren (erledigt/offen), neue Entscheidungen in `docs/entscheidungen.md`
+2. Eigene Verlaufsdatei `docs/verlauf/02-verlauf-claude-code-umsetzung.md` ergänzen (umgesetzt, Feedback JPO, offen, Commit-Hash)
+3. Alles inkl. `docs/` committen und pushen
+4. JPO zum Schluss erinnern: Im claude.ai-Projekt „city concepts Landingpages“ (privater Account) „Projekt-Docs aktualisieren“ sagen – Claude Code selbst kann das Projekt nicht beschreiben
 
 ## Ordnerstruktur
 - `docs/` – Briefings, Konzepte, Keywords, Tracking
