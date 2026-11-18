@@ -46,3 +46,6 @@ docs/quellen/**/*.pdf
 
 # Cowork-Ausgaben (Vorschauen, Übersichten)
 Claude outputs/
+
+# Original-Winner-Package German Design Award (28 MB, nur lokal; genutzte SVGs liegen in public/award/)
+assets/german design award/

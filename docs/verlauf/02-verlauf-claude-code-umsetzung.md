@@ -47,5 +47,8 @@ Siehe `docs/backlog.md`, Abschnitt „Go-live-Check“. Blocker vor der DNS-Umst
 - Interne Notiz zu den Kundenstimmen ist öffentlich sichtbar.
 - `tel:`-Link der Durchwahl falsch, Canonical/og:image, Bildhinweis im Footer, Alt-Text Award-Logo, Mobilprüfung.
 
+## Hinweis Repo-Hygiene
+`assets/german design award/` (Original-Winner-Package, 28 MB, EPS/PDF) war zunächst versehentlich mitcommittet (`717a285`) und ist seit dem Folgecommit nur noch lokal (`.gitignore`). Die Seite nutzt die SVGs in `public/award/`. Das Paket steckt weiter in der Git-Historie von `717a285`; bereinigen würde einen Force-Push erfordern und wurde nicht ohne Rückfrage gemacht.
+
 ## Commit
-Code-Stand `c7ac45a`; Docs-Stand dieser Sitzung im Commit „Verlauf, Go-live-Check und Entscheidungen dokumentieren“.
+Letzter Code-Commit: `c7ac45a` (Stand der Freigabe am 18.11.). Docs-Commits: `717a285` und der Folgecommit „Award-Originalpaket aus dem Repo nehmen“.
